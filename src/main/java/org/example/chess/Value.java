@@ -46,37 +46,7 @@ public class Value {
 
         int piece = Graphic.grilleEchecs[sauvegarde_ligne][sauvegarde_colonne];
 
-        try {
-            int piece_error = Graphic.grilleEchecs[9][9];
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
-            System.out.println("the error   " + piece_error);
 
-
-        } catch (Exception e) {
-
-            System.out.println("une erreur c'est produit ");
-            System.out.println("une erreur c'est produit ");
-            System.out.println("une erreur c'est produit ");
-            System.out.println("une erreur c'est produit ");
-            System.out.println("une erreur c'est produit ");
-
-
-        }
-
-        System.out.println("hmmm  " + piece);
 
 
 
@@ -129,6 +99,10 @@ public class Value {
             //ici on récupére le chiffre
 
             //le chiffre et associer à une piece  ex 6 = pion
+
+
+
+
 
 
 
@@ -320,12 +294,24 @@ public class Value {
 
 
 
-
+//
 
                  */
+                int a = sauvegarde_ligne;
 
 
 
+
+
+
+                if(a == sauvegarde_ligne) {
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+
+
+                    return true;
+                }
 
 
 
@@ -389,7 +375,10 @@ public class Value {
                 //le mlettre en jaune pour bien voir
 
 
-               // Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
+               //Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
+
+
+                autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,1);
 
                 System.out.println("piece  :" + Graphic.grilleEchecs[ligne][colonne]);
                 System.out.println("LIGNE :" + sauvegarde_ligne);
@@ -604,6 +593,8 @@ public class Value {
 
 
 
+
+
             default:
                 break;
 
@@ -681,20 +672,28 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
  */
-
+        System.out.println("APPEL FONCTION ");
 
        try {
-           int piece_error = Graphic.grilleEchecs[x][y];
+
            int piece_ancienn = Graphic.grilleEchecs[Ax][Ay];
+           int piece_error = Graphic.grilleEchecs[x][y];
+           System.out.println("DEBUT DU TRY ");
 
            switch (usage) {
-               case 1:
 
+
+
+               case 1:
+                   System.out.println("USAGE a  ");
+
+                   Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
 
 
                    x += 1;
                    y += 1;
+                   piece_error = Graphic.grilleEchecs[x][y];
 
                    if(piece_error != 0) {
                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
@@ -706,7 +705,12 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                           System.out.println("On tombe sur une piece allier ");
+
+
                        }else{
+                           System.out.println("ON Tombe sur une piece  ");
+
 
                            liste.add("" + x + "," + y + "");
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
@@ -716,7 +720,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                    }else{
-
+                       System.out.println("On ajoute le bordel");
                        liste.add("" + x + "," + y + "");
                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
 
@@ -728,12 +732,15 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                case 2:
+                   System.out.println("USAGE a  ");
 
+                   Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
 
 
-                   x -= 1;
+                   x += 1;
                    y -= 1;
+                   piece_error = Graphic.grilleEchecs[x][y];
 
                    if(piece_error != 0) {
                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
@@ -745,7 +752,12 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                           System.out.println("On tombe sur une piece allier ");
+
+
                        }else{
+                           System.out.println("ON Tombe sur une piece  ");
+
 
                            liste.add("" + x + "," + y + "");
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
@@ -755,7 +767,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                    }else{
-
+                       System.out.println("On ajoute le bordel");
                        liste.add("" + x + "," + y + "");
                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
 
@@ -775,6 +787,9 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                    x -= 1;
                    y -= 1;
+                   Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
+                   System.out.println("DEBUT case 3  ");
+                   piece_error = Graphic.grilleEchecs[x][y];
 
                    if(piece_error != 0) {
                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
@@ -786,17 +801,20 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-                       }else{
 
+                           System.out.println("on est tomber sur un allier :(");
+                       }else{
+                           System.out.println("on est tomber sur une piece  ");
                            liste.add("" + x + "," + y + "");
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
 
                        }
 
 
 
                    }else{
-
+                       System.out.println("tous ce passe comme preveu  ");
                        liste.add("" + x + "," + y + "");
                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
 
@@ -813,6 +831,13 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                    x -= 1;
                    y += 1;
+                   System.out.println("case 4 ");
+
+
+                   Graphic.buttons[x][y].setStyle("-fx-background-color: pink;");
+
+                   piece_error = Graphic.grilleEchecs[x][y];
+
 
                    if(piece_error != 0) {
                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
@@ -824,10 +849,13 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                            //on vérifie si il son de la meme couleur
                            //si c'est le cas ne pas ajouter à la liste et ajouter pour la diagonal suivante
 
-
+                           System.out.println("On est tomber sur un piece allier :/ ");
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
                        }else{
 //ici on ajouter les coordonée car c'est une piece adverse mais on continu pas donc on ajoute 1 si dessus
+
+                           System.out.println("une piece enemie detected ");
+
                            liste.add("" + x + "," + y + "");
                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
 
@@ -837,6 +865,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                    }else{
 //la tout ce passe comme prevu le truc fai son taff
+                       System.out.println("tous ce passe comme prevu  ");
                        liste.add("" + x + "," + y + "");
                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
 
@@ -852,7 +881,13 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
        } catch (Exception e) {
-           System.out.print("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+           System.out.println("la fin car voila voila ");
+
            usage += 1;
            /*
            ici il y a eu une erreur car on a essayer de  appeler un piece erreur qui est pas dans le tableau
@@ -869,7 +904,11 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
            if (usage < 5) {
 
+               System.out.println("la on rapel encore");
+
+
                autorisation_list_diagonale(Ax,Ay,Ax, Ay, usage);
+
            }else{
 
                System.out.print("FINI FINI ");
