@@ -61,9 +61,11 @@ public class Graphic extends Application {
 
 
 
+
+
     //jeux echec test fou
 
-    /*
+/*
    public static int[][] grilleEchecs = {
            {0, 0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0, 0},

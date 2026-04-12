@@ -1,10 +1,12 @@
 package org.example.chess;
 
 
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+
+import static org.example.chess.piece.AutorisationCoup;
+import static org.example.chess.piece.autorisation_list_diagonale;
 
 public class Value {
     private static final int ROI = 1;
@@ -35,8 +37,16 @@ public class Value {
     public int sauvegarde_colonne = -1;
 
 
-    piece piecess = new piece(0,0,0,0,false);
-    ArrayList<String> liste = new ArrayList<>();
+  public static  piece piecess = new piece(0,0,0,0,false);
+
+
+  public static ArrayList<String> liste = new ArrayList<>();
+
+
+
+
+
+
     public boolean movement_piece( int ligne, int colone) {
 
         int x = sauvegarde_colonne;
@@ -297,20 +307,26 @@ public class Value {
 //
 
                  */
-                int a = sauvegarde_ligne;
 
 
 
 
 
 
-                if(a == sauvegarde_ligne) {
+
+                if(AutorisationCoup(ligne,colone)) {
+
+
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
-
+                    System.out.print("Tout va bien !");
 
                     return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
                 }
 
 
@@ -378,7 +394,7 @@ public class Value {
                //Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
 
 
-                autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,1);
+                autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
                 System.out.println("piece  :" + Graphic.grilleEchecs[ligne][colonne]);
                 System.out.println("LIGNE :" + sauvegarde_ligne);
@@ -656,279 +672,10 @@ public class Value {
     }
 
 
-    public void autorisation_list_diagonale(int Ax,int Ay, int x, int y, int usage){
 
-/*
-Le but de cette fonction est de faire un calcul matématique en ajoutant/ retirant des valeur de façon à fait
-les différente 4 diagonal  on prend pour Ax et Ay les tout premier valeur la ou est la piece sur le plateau
-et x et y la premier valeur qui sera modifier pour ajouter les nouvel valeur en fesant les calcul
-le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet de changer de diagonal par la suite
 
 
 
-
-
-
-
-
- */
-        System.out.println("APPEL FONCTION ");
-
-       try {
-
-           int piece_ancienn = Graphic.grilleEchecs[Ax][Ay];
-           int piece_error = Graphic.grilleEchecs[x][y];
-           System.out.println("DEBUT DU TRY ");
-
-           switch (usage) {
-
-
-
-               case 1:
-                   System.out.println("USAGE a  ");
-
-                   Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-
-                   x += 1;
-                   y += 1;
-                   piece_error = Graphic.grilleEchecs[x][y];
-
-                   if(piece_error != 0) {
-                       //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
-                       //suivante
-                       usage += 1;
-                       int newpiece = Graphic.grilleEchecs[x][y];
-
-                       if(piecess.Same_Color(piece_ancienn,newpiece)) {
-
-
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-                           System.out.println("On tombe sur une piece allier ");
-
-
-                       }else{
-                           System.out.println("ON Tombe sur une piece  ");
-
-
-                           liste.add("" + x + "," + y + "");
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-
-                       }
-
-
-
-                   }else{
-                       System.out.println("On ajoute le bordel");
-                       liste.add("" + x + "," + y + "");
-                       autorisation_list_diagonale(Ax, Ay, x, y, usage);
-
-                   }
-                   break;
-
-
-
-
-
-               case 2:
-                   System.out.println("USAGE a  ");
-
-                   Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-
-                   x += 1;
-                   y -= 1;
-                   piece_error = Graphic.grilleEchecs[x][y];
-
-                   if(piece_error != 0) {
-                       //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
-                       //suivante
-                       usage += 1;
-                       int newpiece = Graphic.grilleEchecs[x][y];
-
-                       if(piecess.Same_Color(piece_ancienn,newpiece)) {
-
-
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-                           System.out.println("On tombe sur une piece allier ");
-
-
-                       }else{
-                           System.out.println("ON Tombe sur une piece  ");
-
-
-                           liste.add("" + x + "," + y + "");
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-
-                       }
-
-
-
-                   }else{
-                       System.out.println("On ajoute le bordel");
-                       liste.add("" + x + "," + y + "");
-                       autorisation_list_diagonale(Ax, Ay, x, y, usage);
-
-                   }
-                   break;
-
-
-
-
-
-               case 3:
-
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-
-                   x -= 1;
-                   y -= 1;
-                   Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
-                   System.out.println("DEBUT case 3  ");
-                   piece_error = Graphic.grilleEchecs[x][y];
-
-                   if(piece_error != 0) {
-                       //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
-                       //suivante
-                       usage += 1;
-                       int newpiece = Graphic.grilleEchecs[x][y];
-
-                       if(piecess.Same_Color(piece_ancienn,newpiece)) {
-
-
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-
-                           System.out.println("on est tomber sur un allier :(");
-                       }else{
-                           System.out.println("on est tomber sur une piece  ");
-                           liste.add("" + x + "," + y + "");
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-
-
-                       }
-
-
-
-                   }else{
-                       System.out.println("tous ce passe comme preveu  ");
-                       liste.add("" + x + "," + y + "");
-                       autorisation_list_diagonale(Ax, Ay, x, y, usage);
-
-                   }
-                   break;
-
-
-               case 4:
-
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-                   //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-
-                   x -= 1;
-                   y += 1;
-                   System.out.println("case 4 ");
-
-
-                   Graphic.buttons[x][y].setStyle("-fx-background-color: pink;");
-
-                   piece_error = Graphic.grilleEchecs[x][y];
-
-
-                   if(piece_error != 0) {
-                       //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
-                       //suivante
-                       usage += 1;
-                       int newpiece = Graphic.grilleEchecs[x][y];
-
-                       if(piecess.Same_Color(piece_ancienn,newpiece)) {
-                           //on vérifie si il son de la meme couleur
-                           //si c'est le cas ne pas ajouter à la liste et ajouter pour la diagonal suivante
-
-                           System.out.println("On est tomber sur un piece allier :/ ");
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-                       }else{
-//ici on ajouter les coordonée car c'est une piece adverse mais on continu pas donc on ajoute 1 si dessus
-
-                           System.out.println("une piece enemie detected ");
-
-                           liste.add("" + x + "," + y + "");
-                           autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
-
-                       }
-
-
-
-                   }else{
-//la tout ce passe comme prevu le truc fai son taff
-                       System.out.println("tous ce passe comme prevu  ");
-                       liste.add("" + x + "," + y + "");
-                       autorisation_list_diagonale(Ax, Ay, x, y, usage);
-
-                   }
-                   break;
-
-
-           }
-
-
-
-
-
-
-       } catch (Exception e) {
-           System.out.println("la fin car voila voila ");
-           System.out.println("la fin car voila voila ");
-           System.out.println("la fin car voila voila ");
-           System.out.println("la fin car voila voila ");
-           System.out.println("la fin car voila voila ");
-           System.out.println("la fin car voila voila ");
-
-           usage += 1;
-           /*
-           ici il y a eu une erreur car on a essayer de  appeler un piece erreur qui est pas dans le tableau
-           donc on a depasse notre limite donc on ajoute à usage pour passer à la diagonal suivante et on remait
-           tout à 0 et voila
-
-
-            */
-
-
-
-
-
-
-           if (usage < 5) {
-
-               System.out.println("la on rapel encore");
-
-
-               autorisation_list_diagonale(Ax,Ay,Ax, Ay, usage);
-
-           }else{
-
-               System.out.print("FINI FINI ");
-               System.out.print("FINI FINI ");
-               System.out.print("FINI FINI ");
-           }
-
-       }
-
-/*
-
-
-
-if (liste.contains("4,2")) {
-    System.out.println("Coordonnée trouvée !");
-}
- */
-
-
-    }
 
 
 

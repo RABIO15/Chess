@@ -1,5 +1,8 @@
 package org.example.chess;
 
+import static org.example.chess.Value.liste;
+import static org.example.chess.Value.piecess;
+
 public class piece {
 
    public int ligneselectionner;
@@ -174,6 +177,563 @@ return ligne;
 
 
     }
+
+
+    public static void autorisation_list_Colone(int Ax, int Ay, int x, int y, int usage){
+
+
+
+
+
+
+        if(usage == 0){
+            //petit morceau de code qui permet de quand on reutilise le fou ça clear les
+            //ancien coordonée "autoriser"
+
+            System.out.println("ça clear " + usage);
+
+            liste.clear();
+            usage += 1;
+
+
+
+        }
+
+        System.out.println("APPEL FONCTION ");
+
+
+        try {
+
+            int piece_ancienn = Graphic.grilleEchecs[Ax][Ay];
+            int piece_error = Graphic.grilleEchecs[x][y];
+
+            System.out.println("DEBUT DU TRY ");
+
+            switch (usage) {
+
+
+
+                case 1:
+
+                    System.out.println("USAGE a  ");
+
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: gray;");
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    x += 1;
+
+                    piece_error = Graphic.grilleEchecs[x][y];
+                    //le piece error acrémente jusqu'a tomber sur un piece donc pas egale à 0
+
+                    if(piece_error != 0) {
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+
+
+                            autorisation_list_Colone(Ax, Ay, Ax, Ay, usage);
+                            System.out.println("On tombe sur une piece allier ");
+
+
+                        }else{
+                            System.out.println("ON Tombe sur une piece  ");
+
+
+                            liste.add("" + x + "," + y + "");
+
+                            System.out.println("" + x + "," + y + "");
+
+                            autorisation_list_Colone(Ax, Ay, Ax, Ay, usage);
+
+                        }
+
+
+
+                    }else{
+
+
+
+                        System.out.println("On ajoute le bordel");
+
+                        liste.add("" + x + "," + y + "");
+
+                        System.out.println("" + x + "," + y + "");
+
+                        autorisation_list_Colone(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+
+
+
+                case 2:
+                    System.out.println("USAGE a  ");
+
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    y += 1;
+
+                    piece_error = Graphic.grilleEchecs[x][y];
+
+                    if(piece_error != 0) {
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                            System.out.println("On tombe sur une piece allier ");
+
+
+                        }else{
+                            System.out.println("ON Tombe sur une piece  ");
+
+
+                            liste.add("" + x + "," + y + "");
+                            System.out.println("" + x + "," + y + "");
+                            autorisation_list_Colone(Ax, Ay, Ax, Ay, usage);
+
+                        }
+
+
+
+                    }else{
+                        System.out.println("On ajoute le bordel");
+                        liste.add("" + x + "," + y + "");
+                        System.out.println("" + x + "," + y + "");
+                        autorisation_list_Colone(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+        } catch (Exception e) {
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+
+            usage += 1;
+           /*
+           ici il y a eu une erreur car on a essayer de  appeler un piece erreur qui est pas dans le tableau
+           donc on a depasse notre limite donc on ajoute à usage pour passer à la diagonal suivante et on remait
+           tout à 0 et voila
+
+
+            */
+
+
+            if (usage < 3) {
+
+                System.out.println("la on rapel encore");
+
+
+                autorisation_list_Colone(Ax, Ay, Ax, Ay, usage);
+
+            } else {
+
+                System.out.print("FINI FINI ");
+                System.out.print("FINI FINI ");
+                System.out.print("FINI FINI ");
+
+
+            }
+
+
+        }
+
+
+
+
+
+        }
+
+
+    public static void autorisation_list_diagonale(int Ax, int Ay, int x, int y, int usage){
+
+/*
+Le but de cette fonction est de faire un calcul matématique en ajoutant/ retirant des valeur de façon à fait
+les différente 4 diagonal  on prend pour Ax et Ay les tout premier valeur la ou est la piece sur le plateau
+et x et y la premier valeur qui sera modifier pour ajouter les nouvel valeur en fesant les calcul
+le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet de changer de diagonal par la suite
+
+
+
+
+
+
+
+
+ */
+
+
+        if(usage == 0){
+            //petit morceau de code qui permet de quand on reutilise le fou ça clear les
+            //ancien coordonée "autoriser"
+
+            System.out.println("ça clear " + usage);
+
+            liste.clear();
+            usage += 1;
+
+
+
+        }
+        System.out.println("APPEL FONCTION ");
+
+        try {
+
+            int piece_ancienn = Graphic.grilleEchecs[Ax][Ay];
+            int piece_error = Graphic.grilleEchecs[x][y];
+            System.out.println("DEBUT DU TRY ");
+
+            switch (usage) {
+
+
+
+                case 1:
+                    System.out.println("USAGE a  ");
+
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    x += 1;
+                    y += 1;
+                    piece_error = Graphic.grilleEchecs[x][y];
+
+                    if(piece_error != 0) {
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                            System.out.println("On tombe sur une piece allier ");
+
+
+                        }else{
+                            System.out.println("ON Tombe sur une piece  ");
+
+
+                          liste.add("" + x + "," + y + "");
+
+                            System.out.println("" + x + "," + y + "");
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
+                        }
+
+
+
+                    }else{
+                        System.out.println("On ajoute le bordel");
+                        liste.add("" + x + "," + y + "");
+                        System.out.println("" + x + "," + y + "");
+                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+
+
+
+                case 2:
+                    System.out.println("USAGE a  ");
+
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    x += 1;
+                    y -= 1;
+                    piece_error = Graphic.grilleEchecs[x][y];
+
+                    if(piece_error != 0) {
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                            System.out.println("On tombe sur une piece allier ");
+
+
+                        }else{
+                            System.out.println("ON Tombe sur une piece  ");
+
+
+                            liste.add("" + x + "," + y + "");
+                            System.out.println("" + x + "," + y + "");
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
+                        }
+
+
+
+                    }else{
+                        System.out.println("On ajoute le bordel");
+                        liste.add("" + x + "," + y + "");
+                        System.out.println("" + x + "," + y + "");
+                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+
+
+
+                case 3:
+
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    x -= 1;
+                    y -= 1;
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
+                    System.out.println("DEBUT case 3  ");
+                    piece_error = Graphic.grilleEchecs[x][y];
+
+                    if(piece_error != 0) {
+
+
+
+
+
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
+                            System.out.println("on est tomber sur un allier :(");
+                        }else{
+                            System.out.println("on est tomber sur une piece  ");
+                            liste.add("" + x + "," + y + "");
+                            System.out.println("" + x + "," + y + "");
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
+
+                        }
+
+
+
+                    }else{
+                        System.out.println("tous ce passe comme preveu  ");
+                        liste.add("" + x + "," + y + "");
+                        System.out.println("" + x + "," + y + "");
+                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+                case 4:
+
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
+
+                    x -= 1;
+                    y += 1;
+                    System.out.println("case 4 ");
+
+
+                    Graphic.buttons[x][y].setStyle("-fx-background-color: pink;");
+
+                    piece_error = Graphic.grilleEchecs[x][y];
+
+
+                    if(piece_error != 0) {
+                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                        //suivante
+                        usage += 1;
+                        int newpiece = Graphic.grilleEchecs[x][y];
+
+                        if(piecess.Same_Color(piece_ancienn,newpiece)) {
+                            //on vérifie si il son de la meme couleur
+                            //si c'est le cas ne pas ajouter à la liste et ajouter pour la diagonal suivante
+
+                            System.out.println("On est tomber sur un piece allier :/ ");
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+                        }else{
+//ici on ajouter les coordonée car c'est une piece adverse mais on continu pas donc on ajoute 1 si dessus
+
+
+
+                            liste.add("" + x + "," + y + "");
+
+
+                            System.out.println("" + x + "," + y + "");
+
+
+                            autorisation_list_diagonale(Ax, Ay, Ax, Ay, usage);
+
+                        }
+
+
+
+                    }else{
+//la tout ce passe comme prevu le truc fai son taff
+
+                        liste.add("" + x + "," + y + "");
+
+
+                        System.out.println("" + x + "," + y + "");
+
+
+                        autorisation_list_diagonale(Ax, Ay, x, y, usage);
+
+                    }
+                    break;
+
+
+            }
+
+
+
+
+
+
+        } catch (Exception e) {
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+            System.out.println("la fin car voila voila ");
+
+            usage += 1;
+           /*
+           ici il y a eu une erreur car on a essayer de  appeler un piece erreur qui est pas dans le tableau
+           donc on a depasse notre limite donc on ajoute à usage pour passer à la diagonal suivante et on remait
+           tout à 0 et voila
+
+
+            */
+
+
+
+
+
+
+            if (usage < 5) {
+
+                System.out.println("la on rapel encore");
+
+
+                autorisation_list_diagonale(Ax,Ay,Ax, Ay, usage);
+
+            }else{
+
+                System.out.print("FINI FINI ");
+                System.out.print("FINI FINI ");
+                System.out.print("FINI FINI ");
+
+
+
+
+
+
+
+            }
+
+        }
+
+/*
+
+
+
+if (liste.contains("4,2")) {
+    System.out.println("Coordonnée trouvée !");
+}
+ */
+
+
+
+    }
+
+    public static  boolean AutorisationCoup(int Ax,int Ay){
+
+        if (liste.contains("" + Ax+ "," + Ay + "")) {
+
+
+            System.out.println("DIAGONALMRETURN EST : " + Ax + "," + Ay + "");
+
+
+            return true;
+
+
+        }else{
+
+            System.out.println("NONNNN !");
+
+            System.out.println("Votre position voulu est :"+  "" + Ax+ "," + Ay + "");
+
+            for (String element : liste) {
+
+                System.out.println(element);
+            }
+
+            return false;
+
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
