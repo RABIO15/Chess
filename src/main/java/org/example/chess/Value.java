@@ -5,8 +5,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-import static org.example.chess.piece.AutorisationCoup;
-import static org.example.chess.piece.autorisation_list_diagonale;
+import static org.example.chess.piece.*;
 
 public class Value {
     private static final int ROI = 1;
@@ -40,7 +39,8 @@ public class Value {
   public static  piece piecess = new piece(0,0,0,0,false);
 
 
-  public static ArrayList<String> liste = new ArrayList<>();
+  public static ArrayList<String> listeDiagonal = new ArrayList<>();
+    public static ArrayList<String> listeColone = new ArrayList<>();
 
 
 
@@ -314,7 +314,7 @@ public class Value {
 
 
 
-                if(AutorisationCoup(ligne,colone)) {
+                if(AutorisationCoup_Diagonal(ligne,colone)) {
 
 
                     //je fait une condition temporaire pour autoriser lereturn true
@@ -334,8 +334,29 @@ public class Value {
                 break;
 
 
+            case TOUR:
 
 
+                if(AutorisationCoup_Colone(ligne,colone)) {
+
+                    System.out.print("Tout va bien pour la tour!");
+
+
+
+
+                    return true;
+
+
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+
+
+                }
+
+
+            break;
 
 
 
@@ -395,6 +416,11 @@ public class Value {
 
 
                 autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+
+                autorisation_list_Colone(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+
 
                 System.out.println("piece  :" + Graphic.grilleEchecs[ligne][colonne]);
                 System.out.println("LIGNE :" + sauvegarde_ligne);

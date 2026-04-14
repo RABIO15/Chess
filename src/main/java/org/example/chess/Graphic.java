@@ -46,7 +46,7 @@ public class Graphic extends Application {
     private Map<Integer, Image> imagesPieces = new HashMap<>();
 
 
-
+/*
     public static int[][] grilleEchecs = {
             {-5, -4, -3, -2, -1, -3, -4, -5},
             {-6, -6, -6, -6, -6, -6, -6, -6},
@@ -59,7 +59,7 @@ public class Graphic extends Application {
     };
 
 
-
+*/
 
 
 
@@ -78,20 +78,19 @@ public class Graphic extends Application {
    };
 
 */
-/*
-jeux echecs pour tester tour
+
     public static int[][] grilleEchecs = {
+            {0, 1, 0, -5, 0, 0, 0, 1},
             {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 1, 0},
+            {0, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 5, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0}
+            {0, 1, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, -2}
     };
 
-    */
+
 
 
     /*
