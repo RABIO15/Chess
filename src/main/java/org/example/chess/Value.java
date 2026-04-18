@@ -40,7 +40,11 @@ public class Value {
 
 
   public static ArrayList<String> listeDiagonal = new ArrayList<>();
-    public static ArrayList<String> listeColone = new ArrayList<>();
+  public static ArrayList<String> listeColone = new ArrayList<>();
+
+  public static ArrayList<String> listeCavalier = new ArrayList<>();
+
+  public static ArrayList<String> listeKing = new ArrayList<>();
 
 
 
@@ -360,6 +364,57 @@ public class Value {
 
 
 
+            case ROI:
+
+                if(AutorisationCoup_King(ligne,colone)) {
+
+
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+                    System.out.print("Tout va bien !");
+
+                    return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+                }
+
+
+                break;
+
+
+
+            case CAVALIER:
+
+
+                if(AutorisationCoup_Cavalier(ligne,colone)) {
+
+
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+                    System.out.print("Tout va bien !");
+
+                    return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+                }
+
+
+
+                break;
+
+
+
+
+
+
+
+
 
             default:
 
@@ -421,6 +476,9 @@ public class Value {
                 autorisation_list_Colone(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
 
+                autorisation_list_Cavalier(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+                autorisation_list_King(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
                 System.out.println("piece  :" + Graphic.grilleEchecs[ligne][colonne]);
                 System.out.println("LIGNE :" + sauvegarde_ligne);

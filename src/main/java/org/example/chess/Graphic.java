@@ -59,26 +59,26 @@ public class Graphic extends Application {
     };
 
 
-*/
+
 
 
 
     //jeux echec test fou
 
-/*
+*/
    public static int[][] grilleEchecs = {
+           {4, 0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 1, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0, 0},
-           {0, 0, 0, 0, 0, 0, 0, 0},
-           {0, 0, 0, 3, 0, 0, 0, 0},
-           {0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 4, 0},
            {0, 0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0, 0}
    };
 
-*/
 
+/*
     public static int[][] grilleEchecs = {
             {0, 1, 0, -5, 0, 0, 0, 1},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -148,7 +148,7 @@ jeux echecs pour tester dame
                 if (idPiece != 0) {
                     button.setGraphic(creerImagePiece(idPiece));
                 }
-
+  
                 if ((i + j) % 2 == 0) {
                     button.setStyle("-fx-background-color: #F0D9B5; -fx-padding: 0;");
                 } else {
