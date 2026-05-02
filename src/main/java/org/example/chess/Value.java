@@ -28,10 +28,10 @@ public class Value {
 
 
 
-    public boolean Grand_rock_blanc = true;
-    public boolean Grand_rock_noir = true;
-    public boolean Petit_rock_blanc = true;
-    public boolean Petit_rock_noir = true;
+    public static boolean Grand_rock_blanc = true;
+    public static boolean Grand_rock_noir = true;
+    public static boolean Petit_rock_blanc = true;
+    public static boolean Petit_rock_noir = true;
     public int sauvegarde_ligne = -1;
     public int sauvegarde_colonne = -1;
 
@@ -46,7 +46,10 @@ public class Value {
 
   public static ArrayList<String> listeKing = new ArrayList<>();
 
+    public static ArrayList<String> listePion = new ArrayList<>();
 
+
+    public static ArrayList<String> listePionBlack = new ArrayList<>();
 
 
 
@@ -123,76 +126,26 @@ public class Value {
 
             case PION:
 
+                if(AutorisationCoup_Pion(ligne,colone)) {
 
 
-                System.out.println(" pion :)" + y);
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
-                if (ligne == (y -= 2) && FirstMove(sauvegarde_ligne, sauvegarde_colonne)) {
+                    System.out.print("Tout va bien !");
 
-
-                    System.out.println(" pion :)" + y);
-                    if (x == colone) {
-                        System.out.println(" youpiii premier coup de pi_on ");
-                        System.out.println(" _______________________________ ");
-                        System.out.println("la Ligne  :" + ligne + "le y :" + y);
-                        System.out.println("La colonne :" + colone + "le x = " + x);
+                    return true;
 
 
 
+                }else{
 
-
-                        /*
-                        On appel cette fonction pour povuoirs mettre ajour la grille car je ne l'avais pas sur cette classe
-                        ce qui fait que on avait pas la meme grille et que après chaque coup je me taper un
-                         System.out.println("même coordonée ??? ");
-            System.out.println("même coordonée ??? ");
-
-            mis ajour le 06/03/26 prochainne fois tester le bordel puis mettre les get et continuer de migre le code
-
-
-
-
-                         */
-
-                        return true;
-                    } else {
-
-
-                        System.out.println("un zib zob ");
-
-                        return false;
-
-                    }
-                }else {
-
-
-
-
-                    y += 2;
-                    System.out.println(" on passe au else  ");
-                    System.out.println(" _______________________________ ");
-                    System.out.println("la Ligne  :" + ligne + "le y :" + y);
-                    System.out.println("La colonne :" + colone + "le x = " + x);
-
-
-                    y -= 1;
-
-                    if (ligne != y ) {
-
-                        return false;
-
-                    }
-
-                    if (x == colone) {
-
-                        return true;
-
-                    }
-
-
-
-
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
                 }
+
+
+
+
 
 
                 break;
@@ -208,79 +161,26 @@ public class Value {
 
             case PIONNOIR:
 
+                if(AutorisationCoup_Pion_Black(ligne,colone)) {
+
+
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+                    System.out.print("Tout va bien !");
+
+                    return true;
 
 
 
+                }else{
 
-
-                System.out.println(" pion :)" + y);
-
-                if (ligne == (y += 2) && FirstMove(sauvegarde_ligne, sauvegarde_colonne)) {
-
-
-                    System.out.println(" pion :)" + y);
-                    if (x == colone) {
-                        System.out.println(" youpiii premier coup de pi_on ");
-                        System.out.println(" _______________________________ ");
-                        System.out.println("la Ligne  :" + ligne + "le y :" + y);
-                        System.out.println("La colonne :" + colone + "le x = " + x);
-
-
-
-
-
-                        /*
-                        On appel cette fonction pour povuoirs mettre ajour la grille car je ne l'avais pas sur cette classe
-                        ce qui fait que on avait pas la meme grille et que après chaque coup je me taper un
-                         System.out.println("même coordonée ??? ");
-            System.out.println("même coordonée ??? ");
-
-            mis ajour le 06/03/26 prochainne fois tester le bordel puis mettre les get et continuer de migre le code
-
-
-
-
-                         */
-
-                        return true;
-                    } else {
-
-
-                        System.out.println("un zib zob ");
-
-                        return false;
-
-                    }
-                }else {
-
-
-
-
-                    y -= 2;
-                    System.out.println(" on passe au else  ");
-                    System.out.println(" _______________________________ ");
-                    System.out.println("la Ligne  :" + ligne + "le y :" + y);
-                    System.out.println("La colonne :" + colone + "le x = " + x);
-
-
-                    y += 1;
-
-                    if (ligne != y ) {
-
-                        return false;
-
-                    }
-
-                    if (x == colone) {
-
-                        return true;
-
-                    }
-
-
-
-
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
                 }
+
+
+
+
 
 
 
@@ -290,7 +190,13 @@ public class Value {
                 break;
 
 
-            case FOU:
+
+
+
+
+
+
+            case FOUNOIR, FOU:
 
                 //faire en sorte de crée un liste de coordonée "autoriser"
                 /*
@@ -338,7 +244,7 @@ public class Value {
                 break;
 
 
-            case TOUR:
+            case TOUR, TOURNOIR:
 
 
                 if(AutorisationCoup_Colone(ligne,colone)) {
@@ -364,7 +270,46 @@ public class Value {
 
 
 
-            case ROI:
+
+
+
+
+
+            case REINE,REINENOIR:
+
+
+                if(AutorisationCoup_Colone(ligne,colone) || AutorisationCoup_Diagonal(ligne,colone)) {
+
+                    System.out.print("Tout va bien pour la reine!");
+
+
+
+
+                    return true;
+
+
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+
+
+                }
+
+
+                break;
+
+
+
+
+
+
+
+
+
+
+
+            case ROI,ROINOIR:
 
                 if(AutorisationCoup_King(ligne,colone)) {
 
@@ -386,7 +331,7 @@ public class Value {
 
 
 
-            case CAVALIER:
+            case CAVALIER,CAVALIERNOIR:
 
 
                 if(AutorisationCoup_Cavalier(ligne,colone)) {
@@ -467,7 +412,7 @@ public class Value {
                 //le mlettre en jaune pour bien voir
 
 
-               //Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
+               Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
 
 
                 autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
@@ -479,6 +424,45 @@ public class Value {
                 autorisation_list_Cavalier(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
                 autorisation_list_King(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+
+                autorisation_list_Pion(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+                autorisation_list_Pion_Black(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+
+
+                if(Coup.Coup_piece == -1){
+
+
+                    Coup.Coup_piece = 1;
+                    //au blanc de jouer
+
+
+
+                }
+
+
+
+
+
+                System.out.println("_____________________");
+                System.out.println("                        ");
+                System.out.println("                        ");
+
+                System.out.println("le ancien y est " + sauvegarde_colonne);
+                System.out.println("le ancien x est " + sauvegarde_ligne);
+                System.out.println("                            ");
+
+                System.out.println("                        ");
+                System.out.println("_____________________");
+
+
+
+
+
+
+
+
 
                 System.out.println("piece  :" + Graphic.grilleEchecs[ligne][colonne]);
                 System.out.println("LIGNE :" + sauvegarde_ligne);
@@ -515,7 +499,7 @@ public class Value {
                 //La pièce arrive sur la case cliquée
 
 
-               FirstMove(sauvegarde_ligne, sauvegarde_colonne);
+               //FirstMove(sauvegarde_ligne, sauvegarde_colonne);
 
                 Graphic.grilleEchecs[sauvegarde_ligne][sauvegarde_colonne] = 0;
                 //on mais lancien position de la piece à 0 pour dire que y a plus rien
@@ -583,7 +567,7 @@ public class Value {
 
 
 
-    public  boolean FirstMove(int sauvegarde_ligne, int sauvegarde_colonne){
+    public  static boolean FirstMove(int sauvegarde_ligne, int sauvegarde_colonne){
 
         switch(Graphic.grilleEchecs[sauvegarde_ligne][sauvegarde_colonne]) {
 
@@ -596,9 +580,20 @@ public class Value {
                     System.out.println("Ceci et la premier fois que vous bouger un pion");
 
                     return true;
+
+
+
                 }else{
 
                     System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null"); System.out.println("vous avez déjà bougez ce pion null"); System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null");
+                    System.out.println("vous avez déjà bougez ce pion null");
+
+
                 }
 
                 break;
