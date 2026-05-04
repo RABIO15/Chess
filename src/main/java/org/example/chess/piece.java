@@ -1409,7 +1409,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
 
-
+//
 
 
  System.out.println("APPEL FONCTION ");

@@ -17,7 +17,7 @@ public class Coup {
         WhoPlayed();
 
 
-
+//
 
         return Coup_piece;
     }

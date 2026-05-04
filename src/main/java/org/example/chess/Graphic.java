@@ -130,7 +130,7 @@ public class Graphic extends Application {
                 button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
                 buttons[i][j] = button;
-
+//a
                 int ligne = i;
                 int colonne = j;
 

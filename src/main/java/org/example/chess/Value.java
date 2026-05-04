@@ -430,7 +430,7 @@ public class Value {
 
                 autorisation_list_Pion_Black(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
-
+//
                 if(Coup.Coup_piece == -1){
 
 
