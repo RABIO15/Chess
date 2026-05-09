@@ -126,13 +126,21 @@ public class Value {
 
             case PION:
 
-                if(AutorisationCoup_Pion(ligne,colone)) {
+                if(AutorisationCoup_Pion(ligne,colone) && Coup.CanPlay(PION)) {
 
 
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
                     System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 0; // le prochaine tour ça sera les noir car je vien de jouer les blanc
+
+                    /**
+                     *
+                     *
+                     * le 0 correspond au noir et le 1 au blanc
+                     *
+                     */
 
                     return true;
 
@@ -161,13 +169,14 @@ public class Value {
 
             case PIONNOIR:
 
-                if(AutorisationCoup_Pion_Black(ligne,colone)) {
+                if(AutorisationCoup_Pion_Black(ligne,colone) && Coup.CanPlay(PIONNOIR)) {
 
 
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
                     System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 1;
 
                     return true;
 
@@ -196,7 +205,7 @@ public class Value {
 
 
 
-            case FOUNOIR, FOU:
+            case  FOU:
 
                 //faire en sorte de crée un liste de coordonée "autoriser"
                 /*
@@ -224,13 +233,14 @@ public class Value {
 
 
 
-                if(AutorisationCoup_Diagonal(ligne,colone)) {
+                if(AutorisationCoup_Diagonal(ligne,colone) && Coup.CanPlay(FOU)) {
 
 
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
                     System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 0;
 
                     return true;
 
@@ -244,15 +254,15 @@ public class Value {
                 break;
 
 
-            case TOUR, TOURNOIR:
+            case TOUR:
 
 
-                if(AutorisationCoup_Colone(ligne,colone)) {
+                if(AutorisationCoup_Colone(ligne,colone) && Coup.CanPlay(TOUR)) {
 
                     System.out.print("Tout va bien pour la tour!");
 
 
-
+                    Coup.Coup_piece = 0;
 
                     return true;
 
@@ -275,15 +285,15 @@ public class Value {
 
 
 
-            case REINE,REINENOIR:
+            case REINE:
 
 
-                if(AutorisationCoup_Colone(ligne,colone) || AutorisationCoup_Diagonal(ligne,colone)) {
+                if(AutorisationCoup_Colone(ligne,colone)  && Coup.CanPlay(REINE) || AutorisationCoup_Diagonal(ligne,colone) && Coup.CanPlay(REINE)) {
 
                     System.out.print("Tout va bien pour la reine!");
 
 
-
+                    Coup.Coup_piece = 0;
 
                     return true;
 
@@ -309,11 +319,34 @@ public class Value {
 
 
 
-            case ROI,ROINOIR:
+            case ROI:
 
-                if(AutorisationCoup_King(ligne,colone)) {
+                if(AutorisationCoup_King(ligne,colone) && Coup.CanPlay(ROI)) {
 
 
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+                    System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 0;
+                    return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+                }
+
+
+                break;
+
+
+
+            case CAVALIER:
+
+
+                if(AutorisationCoup_Cavalier(ligne,colone) && Coup.CanPlay(CAVALIER)) {
+
+                    Coup.Coup_piece = 0;
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
@@ -327,19 +360,140 @@ public class Value {
                 }
 
 
+
                 break;
 
-
-
-            case CAVALIER,CAVALIERNOIR:
-
-
-                if(AutorisationCoup_Cavalier(ligne,colone)) {
+            case CAVALIERNOIR:
+                if(AutorisationCoup_Cavalier(ligne,colone) && Coup.CanPlay(CAVALIERNOIR)) {
 
 
                     //je fait une condition temporaire pour autoriser lereturn true
                     //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
 
+                    System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 1;
+
+                    return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+                }
+
+
+                break;
+
+
+            case ROINOIR:
+
+                if(AutorisationCoup_King(ligne,colone) && Coup.CanPlay(ROINOIR)) {
+
+
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+                    System.out.print("Tout va bien !");
+                    Coup.Coup_piece = 1;
+                    return true;
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+                }
+
+
+                break;
+
+
+            case REINENOIR:
+
+
+                if(AutorisationCoup_Colone(ligne,colone)  && Coup.CanPlay(REINENOIR)|| AutorisationCoup_Diagonal(ligne,colone)&& Coup.CanPlay(REINENOIR)) {
+
+                    System.out.print("Tout va bien pour la reine!");
+
+                    Coup.Coup_piece = 1;
+
+
+                    return true;
+
+
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+
+
+                }
+
+
+                break;
+
+
+
+            case  TOURNOIR:
+
+
+                if(AutorisationCoup_Colone(ligne,colone)&& Coup.CanPlay(TOURNOIR)) {
+
+                    System.out.print("Tout va bien pour la tour!");
+
+
+
+                    Coup.Coup_piece = 1;
+                    return true;
+
+
+
+                }else{
+
+                    System.out.print("non ça va pas ! le x est " + x + " le y est " + y );
+
+
+                }
+
+
+                break;
+
+
+            case FOUNOIR:
+
+                //faire en sorte de crée un liste de coordonée "autoriser"
+                /*
+
+                en prenant la postion de base ajouter x+1 ou  x-1 en ajoutant y +1
+
+                //puis reprendre la coordonée calculer et refaire pareil  jusqu'a 8 en regardant à chaque postion si y a une piece
+                si y a un piece s'arreter sinon s'arreter à 8
+
+
+
+
+
+                 exemple x 1 y 1
+
+
+
+//
+
+                 */
+
+
+
+
+
+
+
+                if(AutorisationCoup_Diagonal(ligne,colone) && Coup.CanPlay(FOUNOIR)) {
+
+
+                    //je fait une condition temporaire pour autoriser lereturn true
+                    //et tester ce que je veux faire  pense à l'enlever après car ne sert a rien
+
+
+
+
+                    Coup.Coup_piece = 1;
                     System.out.print("Tout va bien !");
 
                     return true;
@@ -352,9 +506,6 @@ public class Value {
 
 
                 break;
-
-
-
 
 
 
@@ -413,6 +564,20 @@ public class Value {
 
 
                Graphic.buttons[ligne][colonne].setStyle("-fx-background-color: yellow;");
+
+               Coup coup = new Coup();
+
+
+               if(coup.GetCoup() == -1){
+
+                   Coup.Coup_piece = 1;
+
+
+
+               }
+
+
+                coup.GetCoup();
 
 
                 autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);

@@ -6,14 +6,11 @@ public class Coup {
     public static  int Coup_piece = -1;
 
 
-    public Coup(int Coup_piece){
 
-
-        Coup.Coup_piece = Coup_piece;
-    }
 
 
     public int GetCoup(){
+
         WhoPlayed();
 
 
@@ -25,6 +22,7 @@ public class Coup {
 
 
     public void SetCoup(int value){
+
         WhoPlayed();
 
         Coup_piece = value;
@@ -32,6 +30,56 @@ public class Coup {
 
 
 
+    }
+    public static  boolean CanPlay(int piece){
+
+        if(piece > 0){
+
+            if(Coup_piece == 1 || Coup_piece == -1){
+
+                return true;
+            }else{
+
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
+
+
+            }
+
+        }else{
+
+
+            if(Coup_piece == 0 ){
+
+                return true;
+
+            }else{
+
+
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+                System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+        return false;
     }
 
     public void WhoPlayed(){
@@ -41,7 +89,7 @@ public class Coup {
 
         switch(Coup_piece){
             case 1:
-                System.out.println("C'est au balnc de jouer");
+                System.out.println("C'est au blanc  de jouer");
 
                 break;
 
@@ -52,6 +100,18 @@ public class Coup {
 
             case -1:
                 System.out.println("Debut de parti");
+
+
+
+                break;
+
+
+            default:
+
+                System.out.println("Un problème est survenue");
+                System.out.println("Un problème est survenue");
+                System.out.println("Un problème est survenue");
+                System.out.println("Un problème est survenue");
 
                 break;
 
