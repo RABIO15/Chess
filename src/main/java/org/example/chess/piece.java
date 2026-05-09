@@ -113,7 +113,7 @@ return ligne;
 
     public boolean isWhite(int piece) {
 
-
+//
         return piece > 0;
 
     }

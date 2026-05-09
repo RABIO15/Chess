@@ -32,7 +32,7 @@ public class Coup {
 
     }
     public static  boolean CanPlay(int piece){
-
+//
         if(piece > 0){
 
             if(Coup_piece == 1 || Coup_piece == -1){

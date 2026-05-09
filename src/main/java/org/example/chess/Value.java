@@ -92,6 +92,7 @@ public class Value {
         int newpiece = Graphic.grilleEchecs[ligne][colone];
 
         if(piece == newpiece){
+            //
 
             System.out.println("même coordonée ??? ");
 

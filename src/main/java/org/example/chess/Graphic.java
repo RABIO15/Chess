@@ -34,6 +34,7 @@ public class Graphic extends Application {
     private static final int PION = 6;
 
     // PIÈCES NOIRES
+    //
     private static final int ROINOIR = -1;
     private static final int REINENOIR = -2;
     private static final int FOUNOIR = -3;
