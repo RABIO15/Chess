@@ -3,7 +3,7 @@ package org.example.chess;
 
 import static org.example.chess.Value.*;
 
-public class piece {
+public class Piece {
 
    public int ligneselectionner;
    public int coloneselectionner;
@@ -13,7 +13,7 @@ public class piece {
    public boolean selection_click;
 
 
-public piece(int ligneselectionner,int coloneselectionner,int ligne,int colone,boolean selection_click){
+public Piece(int ligneselectionner, int coloneselectionner, int ligne, int colone, boolean selection_click){
     this.coloneselectionner = coloneselectionner;
     this.ligneselectionner = ligneselectionner;
 
@@ -111,12 +111,7 @@ return ligne;
 
 
 
-    public boolean isWhite(int piece) {
 
-//
-        return piece > 0;
-
-    }
 
     public boolean Same_White(int piece,int second_piece){
 
@@ -125,12 +120,7 @@ return ligne;
 
     }
 
-    public boolean isBlack(int piece){
 
-
-        return piece < 0;
-
-    }
 
 
     public boolean Same_Black(int piece,int second_piece){
@@ -1454,7 +1444,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                     x += 1;
 
-                    Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
+                    //Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
                     System.out.println("_____________________");
                     System.out.println("                        ");
                     System.out.println("le ancien y est " + Ay);
@@ -1503,7 +1493,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x += 1;
                     y -= 1;
 
-                    Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+                   // Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
                     piece_error = Graphic.grilleEchecs[x][y];
 
                     if (piece_error != 0) {
@@ -1552,7 +1542,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x += 1;
                     y += 1;
 
-                    Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
+                   // Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
 
                     // Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
                     System.out.println("DEBUT case 3  ");
@@ -1604,7 +1594,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x += 2;
 
 
-                    Graphic.buttons[x][y].setStyle("-fx-background-color: blue;");
+                  //  Graphic.buttons[x][y].setStyle("-fx-background-color: blue;");
 
                     // Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
                     System.out.println("DEBUT case 4  ");
@@ -1749,7 +1739,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                     x -= 1;
 
-                        Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
+                      //  Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
                     System.out.println("_____________________");
                             System.out.println("                        ");
                         System.out.println("le ancien y est " + Ay);
@@ -1806,7 +1796,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x -= 1;
                     y -= 1;
 
-                     Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+                   //  Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
                     piece_error = Graphic.grilleEchecs[x][y];
 
                     if (piece_error != 0) {
@@ -1857,7 +1847,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x -= 1;
                     y += 1;
 
-                       Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
+                    //   Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
 
                     // Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
                     System.out.println("DEBUT case 3  ");
@@ -1913,7 +1903,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                     x -= 2;
 
 
-                    Graphic.buttons[x][y].setStyle("-fx-background-color: blue;");
+                   // Graphic.buttons[x][y].setStyle("-fx-background-color: blue;");
 
                     // Graphic.buttons[x][y].setStyle("-fx-background-color: yellow;");
                     System.out.println("DEBUT case 4  ");
@@ -2039,10 +2029,20 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
 
 
-
+Ech
 
 
  */
+
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+    System.out.println("ZOUBBBBB " + usage);
+
+
 
 
     if (usage == 0) {
@@ -2074,7 +2074,28 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
             case 1:
 
-                System.out.println("USAGE a  ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+                System.out.println("CASE1 ");
+
 
 
                 //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
@@ -2087,7 +2108,7 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
                 // Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
 
 
-
+                Echec.Colone_Echecs(Ax,Ay,x,y,1,1,0,1);
 
 
                 piece_error = Graphic.grilleEchecs[x][y];

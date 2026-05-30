@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-import static org.example.chess.piece.*;
+import static org.example.chess.Piece.*;
 
 public class Value {
     private static final int ROI = 1;
@@ -22,7 +22,7 @@ public class Value {
     private static final int CAVALIERNOIR = -4;
     private static final int TOURNOIR = -5;
     private static final int PIONNOIR = -6;
-    public static int diagonal =  0;
+
 
 
 
@@ -32,11 +32,11 @@ public class Value {
     public static boolean Grand_rock_noir = true;
     public static boolean Petit_rock_blanc = true;
     public static boolean Petit_rock_noir = true;
-    public int sauvegarde_ligne = -1;
-    public int sauvegarde_colonne = -1;
+    public static int sauvegarde_ligne = -1;
+    public static int sauvegarde_colonne = -1;
 
 
-  public static  piece piecess = new piece(0,0,0,0,false);
+  public static Piece piecess = new Piece(0,0,0,0,false);
 
 
   public static ArrayList<String> listeDiagonal = new ArrayList<>();
@@ -90,26 +90,16 @@ public class Value {
 
 
         int newpiece = Graphic.grilleEchecs[ligne][colone];
+if(!Verification_coup(piece,newpiece)){
 
-        if(piece == newpiece){
-            //
-
-            System.out.println("même coordonée ??? ");
+    return false;
 
 
-            System.out.println("sauvegarde ligne  " + sauvegarde_ligne);
-            System.out.println("sauvegarde colone  " + sauvegarde_colonne);
+}
 
-            System.out.println("ligne  " + ligne);
-            System.out.println("colonne   " + colone);
-            System.out.println("piece " + piece);
-            System.out.println("newpiece " + newpiece);
 
-            reset("a");
 
-            return false;
 
-        }
         System.out.println("le bordel est "+ sauvegarde_ligne +"et "+ sauvegarde_colonne);
 
 
@@ -126,6 +116,13 @@ public class Value {
 
 
             case PION:
+
+
+
+
+
+
+
 
                 if(AutorisationCoup_Pion(ligne,colone) && Coup.CanPlay(PION)) {
 
@@ -871,7 +868,7 @@ public class Value {
         return false;
     }
 
-    public void reset(String all){
+    public static void reset(String all){
 
 
 
@@ -916,8 +913,63 @@ public class Value {
 
     }
 
+    public boolean Same_White(int piece,int second_piece){
+
+        return piece > 0 && second_piece > 0;
 
 
+    }
+
+
+
+
+    public boolean Same_Black(int piece,int second_piece){
+
+        return piece < 0 && second_piece < 0;
+
+
+    }
+
+    public boolean Same_Color(int piece, int seconde_piece){
+
+
+        return Same_Black(piece,seconde_piece) || Same_White(piece,seconde_piece);
+
+
+    }
+
+
+    public boolean Verification_coup(int piece , int newpiece){
+
+
+
+        if(piece == newpiece || Same_Color(piece,newpiece)){
+            //
+
+            System.out.println("même coordonée ??? ou meme couleur de piece");
+
+
+
+
+            reset("a");
+
+            return false;
+
+        }else {
+
+            System.out.println("Tout semble être ok ?");
+
+
+
+
+            return true;
+
+
+        }
+
+
+
+    }
 
 
 

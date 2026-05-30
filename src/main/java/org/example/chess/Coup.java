@@ -40,6 +40,8 @@ public class Coup {
                 return true;
             }else{
 
+
+                Value.reset("a");
                 System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
                 System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
                 System.out.println("C'est au NOIR de jouer car couppiece est à " + Coup_piece);
@@ -59,7 +61,7 @@ public class Coup {
 
             }else{
 
-
+                Value.reset("a");
                 System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
                 System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
                 System.out.println("C'est au BLANC de jouer car couppiece est à " + Coup_piece);
