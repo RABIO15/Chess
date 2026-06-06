@@ -14,14 +14,84 @@ public class Echec {
     public static Boolean EchecsB;
 
     public static int NombreEchec;
+
+    /*
+    NombreEchec;
+    VARIABLE TRES IMPORTANT
+
+    elle va permettre de savoir ou on a est par à port à l'échec 0 c'est aucun echecs on cherche 1 ça va etre inerposer une piece
+    2 ça va etre de manger  la piece qui casse les couilles
+
+
+
+
+
+     */
+
+
+
+
+
+
+
+    /*
+
+    Ces 4 variable vont pêrmettre de sauvegarder un etats spécifique des piece elles font servire pour savoir ou est le roi
+    et  ou est la piece ennemi qui menace ce qui permettre par la suite de reset et de faire des modification et des vérification sp^'acifique
+
+
+     */
+    public static int Piece_echecs_x;
+
+    public static int Piece_echecs_y;
+
+
+    public static int SPiece_echecs_x;
+
+    public static int SPiece_echecs_y;
+
+
+
+
+
+
 //Cette variable va  permettre de compter les echecs ce qui va permettre de voir ou non si on peut mettre un piece entre les 2
     //par edxemple il va vérifier si le nombre dechec et plus que 2 va devoir obligatoirement devoir bouger son rois
 
 
-    public static ArrayList<String> CoupEchec = new ArrayList<>();
 
 
-    public static void Colone_Echecs(int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece) {
+
+    /*
+    Cette variable va juste dire si on peut bloquer l'echec oui ou non ou oui mais il peut pas car sinon il se mais en echecs doncdouble echecs
+
+
+    0 pour non
+
+    1 pour oui
+
+    2 pour pour oui mais en fesant ça il se mais en echecs donc NON
+
+
+
+
+
+
+     */
+
+
+    public static ArrayList<String> CoupEchecKing = new ArrayList<>();
+    //ça va permettrre de connaitre les coup dechecs du rois par ou il est en echecs
+
+
+    public static ArrayList<String> CoupEchec= new ArrayList<>();
+
+    //parreil mais pour la piece ennemie
+
+
+    public static void Colone_Echecs(int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece,int tour_echec) {
+
+
 
 
 
@@ -71,170 +141,296 @@ public class Echec {
 
         try {
 
-            int piece_ancienn = Graphic.grilleEchecs[Ax][Ay];
 
             int piece_error = Graphic.grilleEchecs[x][y];
 
             System.out.println("DEBUT DU TRY ");
 
 
-            System.out.println("ZiiiiiiiiiiiiiiIBBBB " + usage);
-            System.out.println("ZiiiiiiiiiiiiiiIBBBB " + usage);
 
 
-            switch (usage) {
-
-
-                case 1:
-
-
-                    System.out.println("RHAAAAAAAAAAAAAAAAA" + usage);
-                    //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
-
-                    tour += 1;
+    switch (usage) {
 
 
 
-                    piece_error = Graphic.grilleEchecs[x][y];
+        case 1:
 
 
-                    //le piece error acrémente jusqu'a tomber sur un piece donc pas egale à 0
-
-                    if (piece_error != 0) {
-                        //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
-                        //suivante
+            //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
 
 
-                        //vérifier le piece que on a
+
+            tour += 1;
+            //les tour tour fond permettre de savoir ou on a est pour pouvoir l'utiliser après pour connaitre les coordonée ou traversse lechecss
+
+            piece_error = Graphic.grilleEchecs[x][y];
 
 
-                        //Nous avons un rois noir ou blanc
+            //le piece error acrémente jusqu'a tomber sur un piece donc pas egale à 0
 
-                        int newpiece = Graphic.grilleEchecs[x][y];
+            if (piece_error != 0) {
+                //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
+                //suivante
 
-                        if (piecess.Same_Color(1, 5)) {
+
+                //vérifier le piece que on a
 
 
-                            usage += 1;
+                //Nous avons un rois noir ou blanc
 
-                            Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, 0, piece);
-                            // 1 c'est balnc et 0 c'est noir
-                            System.out.println("On tombe sur une piece allier ");
+                int newpiece = Graphic.grilleEchecs[x][y];
 
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");  System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
-                            System.out.println("On tombe sur une piece allier ");
+
+                if (piecess.Same_Color(piece, newpiece) || NombreEchec == 2) {
 
 
 
 
-
-                            Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
-
-
-                        } else {
-                            //si on est rois est que on tombe sur une piece ennemie
+                    //le tour echec va permettre de savoir on esque on est au niveau des echecs
+                    /*
+                    par exemple genre j'ai déjà mis le rois en echecs donc la on voie si les autre piece dans le bordel
+                    peutvent etre echec
 
 
-                            int ANx = Ax;
-                            //noter lancienne position de x
+
+                     */
+
+                    if (NombreEchec == 1) {
+
+                        //si on constante un echec et que dans le trajet de lechec il y a une piece allier qui peut sinterposer
+                        // et bien dire que cette piece peut s'interposer
+                        Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
 
 
-                            for (int i = 0; i <= tour; i++) {
+                        usage += 1;
 
 
-                                ANx += 1;
-
-                                CoupEchec.add("" + ANx + "," + y + "");
-                                //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
-                                //grace à ça on pourras voir si on peut interposer un piece entre les deux
-
-                                Graphic.buttons[ANx][y].setStyle("-fx-background-color: blue;");
 
 
-                            }
-
-                            if (piece == 1 || piece == -1) {
-
-                                if (color == 1) {
-                                    EchecsB = true;
-
-                                } else {
-
-                                    EchecsN = true;
-                                }
-                            }
-
-
-                            System.out.println("" + x + "," + y + "");
-                            usage += 1;
-
-                            Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece);
-
-                        }
+                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, 0, piece, tour_echec);
 
 
                     } else {
 
 
+                        usage += 1;
 
-/*
-                        if(tour > 20){
+                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, 0, piece, 0);
+                        // 1 c'est balnc et 0 c'est noir
 
-                            usage += 1;
-                        }
+                        System.out.println("On tombe sur une piece allier ");
 
 
-*/                      x += 1;
+                        System.out.println("On tombe sur une piece allier ");
+                        System.out.println("On tombe sur une piece allier ");
 
-                        Colone_Echecs(Ax, Ay, x, y, usage, color, tour, piece);
+
+                        Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+
 
                     }
 
 
-                    break;
+                } else {
+                    //si on est rois est que on tombe sur une piece ennemie
 
+
+                    int ANx = Ax;
+                    //noter lancienne position de x
+
+
+                    //récupére ou est la piece ennemie
+                    if (NombreEchec == 0) {
+
+
+                        Piece_echecs_x = x;
+                        Piece_echecs_y = y;
+                        /*
+                        ici on va récupérer la position de la piece qui fait echecs au rois elle va nous servire plus tard
+                        pour pouvoirs faire une vérification si cette piece peut etre mangé ou non !
+
+
+
+                         */
+
+
+
+                        for (int i = 0; i <= tour; i++) {
+
+
+
+
+                                CoupEchecKing.add("" + ANx + "," + y + "");
+
+
+
+
+
+                            //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
+                            //grace à ça on pourras voir si on peut interposer un piece entre les deux
+
+                            Graphic.buttons[ANx][y].setStyle("-fx-background-color: green;");
+                            ANx += 1;
+
+
+                            tour_echec += 1; //va permettre de compter le nombre de tour pour déjà vérifier si on peut interpose une piece avant
+                            //puis si on peut manger ou non enfaite ça va etre un compteur elle va faire la meme fonction que tour mais pour lecehc
+
+
+                        }
+
+
+                        if (piece == 1 || piece == -1) {
+
+                            if (color == 1) {
+                                EchecsB = true;
+
+                            } else {
+
+                                EchecsN = true;
+                            }
+                        }
+
+
+                        System.out.println("" + x + "," + y + "");
+
+                        //usage += 1;
+                        NombreEchec += 1;
+
+                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, tour_echec);
+                        // la ici  on est en échec  donc on rapel le meme truc pour voir si on peut sinterposer
+
+                    }else{
+
+                        if(NombreEchec == 1){
+
+
+                            NombreEchec += 1;
+
+                            if(color == 1){
+                                //si de base il est blanc le mettre en noir et invesement
+                                color = 0;
+                            }else{
+
+
+                                color = 1;
+                            }
+
+                            piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
+
+                            Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, 0);
+
+
+
+                            //sur notre trajet on tombe sur une piece ennemie donc ça sert plus a rien on passe au miammaim trouver quelque chose pour ce faire manger
+
+                        }
+
+
+                        if(NombreEchec == 2) {
+
+                            for (int i = 0; i <= tour; i++) {
+
+
+                                CoupEchec.add("" + ANx + "," + y + "");
+
+
+                                //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
+                                //grace à ça on pourras voir si on peut interposer un piece entre les deux
+
+                                Graphic.buttons[ANx][y].setStyle("-fx-background-color: black");
+
+                                ANx += 1;
+
+
+                            }
+
+
+
+
+
+
+
+                            //en gros la c'est la partie reset qui va permettre de remettre un peu tout ancien état de lechec decouverte pour regarde les autre colone quoi si y aeche ou non
+                            NombreEchec  -= 1;
+
+                            if(color == 1){
+                                //si de base il est blanc le mettre en noir et invesement
+                                color = 0;
+                            }else{
+
+
+                                color = 1;
+                            }
+                            usage += 1;
+                            piece = Graphic.grilleEchecs[SPiece_echecs_x][SPiece_echecs_y];
+
+                            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, 0, piece, 0);
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+
+                        //ici le rois et en echec donc bite
+
+
+
+                    }
+
+                }
+
+
+
+
+            } else {
+
+
+
+
+                x += 1;
+
+                if(tour_echec == 0 && NombreEchec == 1){
+
+                   NombreEchec += 1;
+
+                   if(color == 1){
+                       //si de base il est blanc le mettre en noir et invesement
+                       color = 0;
+                   }else{
+
+
+                       color = 1;
+                   }
+
+                   piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
+
+                    Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, tour_echec);
+
+
+                }else {
+
+                    Colone_Echecs(Ax, Ay, x, y, usage, color, tour, piece, tour_echec);
+
+                }
 
             }
+
+
+            break;
+
+
+    }
+
 
         } catch (Exception e) {
 
@@ -245,7 +441,62 @@ public class Echec {
             System.out.println("la fin car voila voila ");
             System.out.println("la fin car voila voila ");
 
+
+
+
+            if(tour_echec == 0 && NombreEchec == 1){
+
+                NombreEchec += 1;
+
+                if(color == 1){
+                    //si de base il est blanc le mettre en noir et invesement
+                    color = 0;
+                }else{
+
+
+                    color = 1;
+                }
+
+                piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
+
+                Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, tour_echec);
+
+
+            }else {
+
+        if(NombreEchec == 2){
+
+
+         NombreEchec  -= 1;
+
+            if(color == 1){
+                //si de base il est blanc le mettre en noir et invesement
+                color = 0;
+            }else{
+
+
+                color = 1;
+            }
             usage += 1;
+            piece = Graphic.grilleEchecs[SPiece_echecs_x][SPiece_echecs_y];
+
+            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, 0, piece, 0);
+
+
+
+    }
+                usage += 1;
+
+            }
+
+
+
+
+
+
+
+
+
            /*
            ici il y a eu une erreur car on a essayer de  appeler un piece erreur qui est pas dans le tableau
            donc on a depasse notre limite donc on ajoute à usage pour passer à la diagonal suivante et on remait
@@ -260,7 +511,9 @@ public class Echec {
                 System.out.println("la on rapel encore");
 
                 usage += 1;
-                Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece);
+                Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece,tour_echec);
+
+
 
             } else {
 

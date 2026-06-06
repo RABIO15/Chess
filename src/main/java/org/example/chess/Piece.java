@@ -2108,7 +2108,7 @@ Ech
                 // Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
 
 
-                Echec.Colone_Echecs(Ax,Ay,x,y,1,1,0,1);
+                Echec.Colone_Echecs(Ax,Ay,x,y,1,1,0,1,0);
 
 
                 piece_error = Graphic.grilleEchecs[x][y];

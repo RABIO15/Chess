@@ -586,9 +586,13 @@ if(!Verification_coup(piece,newpiece)){
 
                 autorisation_list_Cavalier(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
-                autorisation_list_King(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
+                int piece_king = Graphic.grilleEchecs[ligne][colonne];
 
 
+                if(piece_king == -1 || piece_king == 1) {
+                    autorisation_list_King(sauvegarde_ligne, sauvegarde_colonne, sauvegarde_ligne, sauvegarde_colonne, 0);
+
+                }
                 autorisation_list_Pion(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
                 autorisation_list_Pion_Black(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
