@@ -481,7 +481,7 @@ public class Echec {
 
                                 tour_echec -= 2;
 
-                                //le moin 2 permet de camoufler le surplus
+                                //le moin 2f permet de camoufler le surplus
 
 
                                 while (i  < tour_echec){

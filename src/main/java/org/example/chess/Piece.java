@@ -2112,7 +2112,7 @@ Ech
 
 
                 piece_error = Graphic.grilleEchecs[x][y];
-
+//a
                 if (piece_error != 0) {
 
 

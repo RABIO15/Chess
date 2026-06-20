@@ -577,7 +577,7 @@ if(!Verification_coup(piece,newpiece)){
 
                 coup.GetCoup();
 
-
+//a
                 autorisation_list_diagonale(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,0);
 
 

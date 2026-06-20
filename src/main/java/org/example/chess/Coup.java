@@ -53,6 +53,7 @@ public class Coup {
             }
 
         }else{
+            //a
 
 
             if(Coup_piece == 0 ){
