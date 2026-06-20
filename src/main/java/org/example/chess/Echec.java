@@ -95,6 +95,8 @@ public class Echec {
 
 
 
+
+
 /*
 
     14/05/26
@@ -135,6 +137,21 @@ public class Echec {
 
  */
 
+        if(usage == 0){
+
+
+            usage += 1;
+
+
+            SPiece_echecs_x = x;
+            SPiece_echecs_y = y;
+            //permet de sauvegarder l'état de ou est le rois de base
+
+
+        }
+
+
+
 
         System.out.println("APPEL FONCTION ");
 
@@ -154,6 +171,18 @@ public class Echec {
 
 
         case 1:
+
+
+
+                for (int j = 0; j < 1000; j++) {
+
+                    System.out.println("|||||  " + NombreEchec);
+
+                }
+
+
+
+
 
 
             //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
@@ -178,10 +207,47 @@ public class Echec {
 
                 //Nous avons un rois noir ou blanc
 
+                if(NombreEchec == 1) {
+
+                    for (int j = 0; j < 1000; j++) {
+
+                        System.out.println("-----------  " + NombreEchec);
+
+                    }
+
+                }
+
                 int newpiece = Graphic.grilleEchecs[x][y];
 
+                if(NombreEchec == 1){
 
-                if (piecess.Same_Color(piece, newpiece) || NombreEchec == 2) {
+                    x += 1;
+
+                    newpiece = Graphic.grilleEchecs[x][y];
+                }
+
+                /*
+
+
+
+                LE PROBLEME EST LA POUR LE 2 EMEM TRUC §§§§§§
+                LE PROBLEME EST LA POUR LE 2 EMEM TRUC §§§§§§
+                 */
+
+
+                if (piecess.Same_Color(piece, newpiece) && NombreEchec < 2) {
+
+
+
+                    if(NombreEchec == 1) {
+
+                        for (int j = 0; j < 1000; j++) {
+
+                            System.out.println("&&&&&&&& " + NombreEchec);
+
+                        }
+
+                    }
 
 
 
@@ -195,11 +261,21 @@ public class Echec {
 
                      */
 
-                    if (NombreEchec == 1) {
+                    if (NombreEchec == 1 && piece != 1 ) {
+
+                        /*
+                        Ici on fait la vérification que la quand on est en echecs  si on tombe sur une piece allier
+                        et bien fait ça  est exclure le rois car quand il est en echecs premier fois il reboucle
+                        sur les meme coordonée ce qui fait qui se prend lui meme pour une piece allier et ça fou le bordel
+
+
+
+
+                         */
 
                         //si on constante un echec et que dans le trajet de lechec il y a une piece allier qui peut sinterposer
                         // et bien dire que cette piece peut s'interposer
-                        Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
+                        Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
 
 
                         usage += 1;
@@ -207,26 +283,35 @@ public class Echec {
 
 
 
-                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, 0, piece, tour_echec);
 
+
+                        for(int i = 0; i < 1000; i++){
+
+                            System.out.println("NOMBRE ECHEC :  " + NombreEchec);
+                        }
+
+                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, tour_echec);
 
                     } else {
 
-
-                        usage += 1;
-
-                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, 0, piece, 0);
-                        // 1 c'est balnc et 0 c'est noir
-
-                        System.out.println("On tombe sur une piece allier ");
+                        if(newpiece != 1 ) {
 
 
-                        System.out.println("On tombe sur une piece allier ");
-                        System.out.println("On tombe sur une piece allier ");
+                            usage += 1;
+
+                            Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, 0);
+
+                            // 1 c'est balnc et 0 c'est noir
+
+                            System.out.println("On tombe sur une piece allier ");
 
 
-                        Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+                            System.out.println("On tombe sur une piece allier ");
+                            System.out.println("On tombe sur une piece allier ");
 
+
+                            Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+                        }
 
                     }
 
@@ -234,20 +319,38 @@ public class Echec {
                 } else {
                     //si on est rois est que on tombe sur une piece ennemie
 
-
                     int ANx = Ax;
+
                     //noter lancienne position de x
 
 
                     //récupére ou est la piece ennemie
+
+                    if(NombreEchec == 1) {
+
+                        for (int j = 0; j < 1000; j++) {
+
+                            System.out.println("=====  " + NombreEchec);
+
+                        }
+
+                    }
+
                     if (NombreEchec == 0) {
+
 
 
                         Piece_echecs_x = x;
                         Piece_echecs_y = y;
+
+                        for(int i = 0; i < 1000; i++) {
+
+                            System.out.println("POSITION X " + x);
+                            System.out.println("POSITION Y " + y);
+                        }
                         /*
                         ici on va récupérer la position de la piece qui fait echecs au rois elle va nous servire plus tard
-                        pour pouvoirs faire une vérification si cette piece peut etre mangé ou non !
+                        pour pouvoirs faire une vérification si cette piece peut etre mangé ou non et donc pouvoirs contrer lechec ou NON !
 
 
 
@@ -258,7 +361,7 @@ public class Echec {
                         for (int i = 0; i <= tour; i++) {
 
 
-
+                            tour_echec += 1;
 
                                 CoupEchecKing.add("" + ANx + "," + y + "");
 
@@ -270,10 +373,11 @@ public class Echec {
                             //grace à ça on pourras voir si on peut interposer un piece entre les deux
 
                             Graphic.buttons[ANx][y].setStyle("-fx-background-color: green;");
+
+
+
                             ANx += 1;
-
-
-                            tour_echec += 1; //va permettre de compter le nombre de tour pour déjà vérifier si on peut interpose une piece avant
+                            //va permettre de compter le nombre de tour pour déjà vérifier si on peut interpose une piece avant
                             //puis si on peut manger ou non enfaite ça va etre un compteur elle va faire la meme fonction que tour mais pour lecehc
 
 
@@ -294,16 +398,50 @@ public class Echec {
 
                         System.out.println("" + x + "," + y + "");
 
-                        //usage += 1;
+
+
                         NombreEchec += 1;
 
+                        for(int j = 0; j < 1000; j++){
+
+                            System.out.println("LE NOMBRE VIEN DAUGMENTER : " + NombreEchec);
+
+                        }
+
+
                         Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, tour_echec);
+                        /*
+
+
+                        partie teste j'ai remplacer tour par tour_eche car y a une verif en bas qui peut faiure merder
+                         */
+
+
                         // la ici  on est en échec  donc on rapel le meme truc pour voir si on peut sinterposer
 
                     }else{
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                         if(NombreEchec == 1){
 
+
+                            for(int j = 0; j < 1000; j++){
+
+                                System.out.println("111111111111111111111111111111111111111111111   ");
+
+                            }
 
                             NombreEchec += 1;
 
@@ -318,7 +456,7 @@ public class Echec {
 
                             piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
 
-                            Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, 0);
+                            Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
 
 
 
@@ -329,10 +467,27 @@ public class Echec {
 
                         if(NombreEchec == 2) {
 
-                            for (int i = 0; i <= tour; i++) {
+
+                            for(int j = 0; j < 1000; j++){
+
+                                System.out.println("222222222222222222222222222222222   ");
+
+                            }
+
+                            ANx = SPiece_echecs_x;
 
 
-                                CoupEchec.add("" + ANx + "," + y + "");
+                                int i = 0;
+
+                                tour_echec -= 2;
+
+                                //le moin 2 permet de camoufler le surplus
+
+
+                                while (i  < tour_echec){
+
+
+                                    CoupEchec.add("" + ANx + "," + y + "");
 
 
                                 //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
@@ -341,6 +496,8 @@ public class Echec {
                                 Graphic.buttons[ANx][y].setStyle("-fx-background-color: black");
 
                                 ANx += 1;
+
+                                i++;
 
 
                             }
@@ -365,7 +522,7 @@ public class Echec {
                             usage += 1;
                             piece = Graphic.grilleEchecs[SPiece_echecs_x][SPiece_echecs_y];
 
-                            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, 0, piece, 0);
+                            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, 0, piece, tour_echec);
 
 
 
@@ -381,7 +538,7 @@ public class Echec {
 
 
 
-                        //ici le rois et en echec donc bite
+                        //ici le rois et en echec donc
 
 
 
@@ -401,6 +558,14 @@ public class Echec {
 
                 if(tour_echec == 0 && NombreEchec == 1){
 
+
+
+                    for(int i = 0; i < 1000; i++) {
+
+                        System.out.println("CE4SY LA BOOOOOC+UCLE" );
+
+                    }
+
                    NombreEchec += 1;
 
                    if(color == 1){
@@ -414,10 +579,17 @@ public class Echec {
 
                    piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
 
-                    Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, tour_echec);
+                    Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
 
 
                 }else {
+                    if(NombreEchec == 2){
+                        for(int i = 0; i < 1000; i++) {
+                            System.out.println("AZERTY");
+                        }
+
+
+                    }
 
                     Colone_Echecs(Ax, Ay, x, y, usage, color, tour, piece, tour_echec);
 
@@ -459,15 +631,24 @@ public class Echec {
 
                 piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
 
-                Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, 0, piece, tour_echec);
+                Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
 
 
             }else {
+                /*
+
+                zib zob
+                 */
 
         if(NombreEchec == 2){
 
 
          NombreEchec  -= 1;
+            for(int i = 0; i < 1000; i++) {
+                System.out.println("AZERTY");
+            }
+
+
 
             if(color == 1){
                 //si de base il est blanc le mettre en noir et invesement
@@ -480,7 +661,7 @@ public class Echec {
             usage += 1;
             piece = Graphic.grilleEchecs[SPiece_echecs_x][SPiece_echecs_y];
 
-            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, 0, piece, 0);
+            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, piece, tour_echec);
 
 
 
@@ -523,6 +704,11 @@ public class Echec {
 
 
             }
+
+
+
+
+
 
 
         }
