@@ -590,6 +590,14 @@ if(!Verification_coup(piece,newpiece)){
 
 
                 if(piece_king == -1 || piece_king == 1) {
+
+
+                    /*
+
+                    faire avant les vérification naissaire  pour voir si le rois est en echec
+
+                     */
+
                     autorisation_list_King(sauvegarde_ligne, sauvegarde_colonne, sauvegarde_ligne, sauvegarde_colonne, 0);
 
                 }

@@ -2108,7 +2108,13 @@ Ech
                 // Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
 
 
+                /*
+
+                faire en sorte que dans la classe coup mettre cette fonction et vérifier avant si c'est le rois
+                qui jour mais pas la car le static fous trop la merde
+
                 Echec.Colone_Echecs(Ax,Ay,x,y,0,1,0,1,0);
+                 */
 
 
                 piece_error = Graphic.grilleEchecs[x][y];
