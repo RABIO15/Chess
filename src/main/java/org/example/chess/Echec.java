@@ -16,7 +16,11 @@ public class Echec {
     public static boolean ECHEC;
 
     public static int  INTERCEPTION_ECHEC;
+
     public static boolean  Piece_ennemie;
+
+    public static boolean Piece_Allier_Echec;
+    public static int  newpiece;
 
 
 
@@ -138,7 +142,7 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
         try {
 
 
-            int piece_error = Graphic.grilleEchecs[x][y];
+            int PIECE_PRESENTE = Graphic.grilleEchecs[x][y];
             //servira pour plus tard
 
 
@@ -164,12 +168,12 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
             tour += 1;
             //les tour tour fond permettre de savoir ou on a est pour pouvoir l'utiliser après pour connaitre les coordonée ou traversse lechecss
 
-            piece_error = Graphic.grilleEchecs[x][y];
+            PIECE_PRESENTE = Graphic.grilleEchecs[x][y];
 
 
             //le piece error acrémente jusqu'a tomber sur un piece donc pas egale à 0
 
-            if (piece_error != 0) {
+            if (PIECE_PRESENTE  != 0) {
                 //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
                 //suivante
 
@@ -178,7 +182,7 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
 
-                int newpiece = Graphic.grilleEchecs[x][y];
+                 newpiece = Graphic.grilleEchecs[x][y];
                 /*
 
                 on crée une variable qui va recupérer les coordonée ou on a une piece pour pouvoir la comparé par la suite
@@ -212,7 +216,9 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
 
-                if (piecess.Same_Color(piece, newpiece) ) {
+
+
+
 
 
                     //ici on verifier la piece est de la meme couleur et que y a pas 2 echec en meme temps sinon
@@ -235,122 +241,28 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                      */
 
-                    if (ECHEC && piece != 1 && tour_echec != 400) {
 
 
-                        /*
 
 
-                        UTILISATION quand on est en echec et que on tombe sur une piece allier qui peut nous aider
 
 
 
 
-                         */
-
-
-
-                        /*
-
-                        le if est placé que on tombe sur un piece allier quand on est en echec et que la piece allier n'est pas le rois
-
-
-                         */
-
-
-                        Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
-
-
-
-                        /*
-                        On doit faire la vérification que la piece allier n'est pas CLOUER
-
-
-                         */
-
-                                tour_echec = 400;
-                                tour = 0;
-                                /*
-
-                                on réinistialise un peu tout dans pour voir dans ce case si la piece est en echec ou non
-                                et on mais tour echec à 400 pour connaitre le fait que c'estr juste une verificatrion de passage
-
-                                 */
-
-
-
-                        piece = Graphic.grilleEchecs[x][y];
-
-                        //ici on dit que la piece et  notre piece allier qui peut nous sauver
-                        //car elle peut aller sur le trajet de lehec ce que on souhait
-
-
-
-
-
-                        Colone_Echecs(x, y, x, y, usage, color, tour, piece, tour_echec);
-
-                        /*
-
-                        ici on rappel la fonction pour regarder desormer si notre piece qui peut stoper l'echec est elle meme
-                        en echec si c'est le cas cela foudra dire que nous somme clouer et donc perdu
-
-                         */
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-                    else {
-
-
-
-                        /*
-
-
-                        Utilisation normal quand tous ce passe bien
-
-
-                         */
-
-                        if(newpiece != 1  ) {
-
-
-                            usage += 1;
-
-                            Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, 0);
-
-                            // 1 c'est balnc et 0 c'est noir
-
-
-                            System.out.println("On tombe sur une piece allier ");
-
-
-                            Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
-                        }else{
-
-                            System.out.println("Un probléme est survenu ");
-
-                        }
-
-                    }
-
-
-                }
 
                 /*
 
                 CAS NOUS SOMME EN ECHEC
 
                  */
+                if (piecess.Same_Color(piece, newpiece) ) {
+
+
+                    Same_color_Execute(Ax, Ay,  x,  y,  usage,  color,  tour,  piece, tour_echec, this::Colone_Echecs);
+
+
+
+                }
 
 
                 else {
@@ -365,10 +277,10 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                     //récupére ou est la piece ennemie
 
-                    if (!ECHEC || tour_echec == 400) {
+                    if (!ECHEC || Piece_Allier_Echec) {
 
 
-                        if(tour_echec == 400){
+                        if(Piece_Allier_Echec){
 
                             /*
 
@@ -384,6 +296,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
                             usage += 1;
                            //la va falloir ajouter 1 à usage car dans le sens colone du bas ça peut pas marcher c'est
                             //pas posible car le truc est clouer et mettre les ancienne coordonée du rois
+
+
                             if(color == 1) {
 
                                 Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, 1, 0);
@@ -521,6 +435,7 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                                     CAS ON CROISSE UNE PIECE ENNEMI ET ON EST DEJA EN ECHECS
                                     CAR SI CEST LA PREMIER FOIS BAH IL VA LIGNORER
+
                                     ET SI CES PAS LA PREMIER FOIS CA VEUT SOIS DIRE QUE CEST UN AUTRE QUI
                                     A DECOUVERT LECHEC ET CE COTER A DECOUVERT UN AUTRE ECHEC DONC DOUBLE
                                     ECHEC CEST FINI OU A FAIT DEJA TOUT LES CAS
@@ -629,7 +544,7 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
-                         if(piece ==1 || piece == -1) {
+                         if(piece == 1 || piece == -1) {
 
                              /*
                                 cette verification permet de dire si la piece est le rois ou pas pour éviter
@@ -649,6 +564,8 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
                                  color = 1;
                              }
+
+
 
                              piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
 
@@ -716,15 +633,7 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
-                                //le moin 2 permet de camoufler le surplus
 
-                            //car enfaite il va prendre de tour qui prend le rois est la tour en compte
-                            /*
-                            mais pour pouvoir contrer lechec nous il nous faut que les case en noir entre en gros
-
-
-
-                             */
 
 
 
@@ -923,6 +832,117 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
         }
+
+
+    }
+
+
+    public void Same_color_Execute(int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece,int tour_echec,FonctionDeFonction fonction){
+
+        if (ECHEC && piece != 1 && !Piece_Allier_Echec) {
+
+
+                        /*
+
+
+                        UTILISATION quand on est en echec et que on tombe sur une piece allier qui peut nous aider
+
+
+
+
+                         */
+
+
+
+                        /*
+
+                        le if est placé que on tombe sur un piece allier quand on est en echec et que la piece allier n'est pas le rois
+
+
+                         */
+
+
+            Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
+
+
+
+                        /*
+                        On doit faire la vérification que la piece allier n'est pas CLOUER
+
+
+                         */
+
+            Piece_Allier_Echec = true;
+
+            tour = 0;
+
+
+
+            piece = Graphic.grilleEchecs[x][y];
+
+            //ici on dit que la piece et  notre piece allier qui peut nous sauver
+            //car elle peut aller sur le trajet de lehec ce que on souhait
+
+
+
+
+
+            fonction.apply(x, y, x, y, usage, color, tour, piece, tour_echec);
+
+                        /*
+
+                        ici on rappel la fonction pour regarder desormer si notre piece qui peut stoper l'echec est elle meme
+                        en echec si c'est le cas cela foudra dire que nous somme clouer et donc perdu
+
+                         */
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        else {
+
+
+
+                        /*
+
+
+                        Utilisation normal quand tous ce passe bien
+
+
+                         */
+
+            if(newpiece != 1  ) {
+
+
+                usage += 1;
+
+                fonction.apply(x, y, x, y, usage, color, tour, piece, tour_echec);
+
+                // 1 c'est balnc et 0 c'est noir
+
+
+                System.out.println("On tombe sur une piece allier ");
+
+
+                Graphic.buttons[x][y].setStyle("-fx-background-color: red;");
+
+            }else{
+
+                System.out.println("Un probléme est survenu ");
+
+            }
+
+        }
+
 
 
     }
