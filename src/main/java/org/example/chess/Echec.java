@@ -1,6 +1,7 @@
 package org.example.chess;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.example.chess.Value.piecess;
 
@@ -15,45 +16,29 @@ public class Echec {
 
     public static boolean ECHEC;
 
-    public static int  INTERCEPTION_ECHEC;
+
 
     public static boolean  Piece_ennemie;
 
     public static boolean Piece_Allier_Echec;
-    public static int  newpiece;
 
+    private static boolean DOUBLE_VERIFICATION;
 
-
-    /*
-    INTERCEPTION_ECHEC
-
-    0 on peut pas
-
-    1 on peut
-
-    2 entre les deux
-
-
-     */
+    //Variable qui va nous dire si oui ou non on a déjà fait une vérification des echec
+    //permettra de refaire un tour ou non pour faire les vérifition de case diposnible exmple concrait
+    //vers les lignes 600
 
 
 
 
 
 
-    /*
-    NombreEchec;
-    VARIABLE TRES IMPORTANT
-
-    elle va permettre de savoir ou on a est par à port à l'échec 0 c'est aucun echecs on cherche 1 ça va etre inerposer une piece
-    2 ça va etre de manger  la piece qui casse les couilles
-
-La variable Usage_echec va permttre de savoir de quel "coter on est en echec" cela va permettre
-d'autoriser ou non le fait de faire une raser la ou on pourra interposer une piece ou non
 
 
 
-     */
+
+
+
 
 
 
@@ -68,14 +53,51 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
      */
+
+    public static int  newpiece;
+
+    //variable recupératrice de piece pour permettre de comparer les piece entre elle permet de connaitre
+    //si les piece sont de la meme couleur ou si la piece est un rois ou non etc ..
+
+
+
     public static int Piece_echecs_x;
+    //Variable qui va servire de conteneur pour récupérer la position en X de la piece qui mais en echec
+
+
+
 
     public static int Piece_echecs_y;
+    //Variable qui va servire de conteneur pour récupérer la position en Y de la piece qui mais en echec
+
+
+
+
+
+
 
 
     public static int SPiece_echecs_x;
+    //sont des variable de conteneur qui sauvegardera l'état de ou est le rois en position X
 
     public static int SPiece_echecs_y;
+    //sont des variable de conteneur qui sauvegardera l'état de ou est le rois en position Y
+
+
+
+
+
+
+    public static int SAUV_Allier_Piece_echecs_x;
+    //sont des variable de conteneur qui sauvegardera l'état de ou est la piece allier qui peut s'interposer entre lechec en position X
+
+    public static int SAUV_Allier_SPiece_echecs_y;
+    //sont des variable de conteneur qui sauvegardera l'état de ou est la piece allier qui peut s'interposer entre lechec en position Y
+
+
+
+
+
 
 
 
@@ -107,6 +129,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
      */
 
 
+
+
     public static ArrayList<String> CoupEchecKing = new ArrayList<>();
     //ça va permettrre de connaitre les coup dechecs du rois par ou il est en echecs
 
@@ -114,6 +138,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
     public static ArrayList<String> CoupEchec= new ArrayList<>();
 
     //parreil mais pour la piece ennemie
+
+    public static ArrayList<Direction> directions  = new ArrayList<>();
 
 
     public void Colone_Echecs(int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece,int tour_echec) {
@@ -126,8 +152,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
             usage += 1;
 
 
-            SPiece_echecs_x = x;
-            SPiece_echecs_y = y;
+            SPiece_echecs_x = Ax;
+            SPiece_echecs_y = Ay;
             //permet de sauvegarder l'état de ou est le rois de base
 
 
@@ -161,7 +187,7 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
 
-            //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
+
 
 
 
@@ -177,19 +203,12 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
                 //cette verif permet de voir si on tombe sur une piece et bien on  s'arret et on passe à la diagonal
                 //suivante
 
-
-
-
-
-
                  newpiece = Graphic.grilleEchecs[x][y];
                 /*
 
                 on crée une variable qui va recupérer les coordonée ou on a une piece pour pouvoir la comparé par la suite
 
                  */
-
-
 
                 if(ECHEC){
 
@@ -209,6 +228,57 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
                      */
+
+                    /*
+
+                    SHEMA
+
+                    LEGENDE:
+                    1 = rois BLANC
+                    -2 = RENNE NOIR
+                    X = la ou est NewPiece
+                    5 = TOUR
+
+
+                    ********1*****-2
+                    *********X*****
+                    ****************
+                    ************5***
+                    ici la piece piece verificatrice va voir au tien il y a rien donc elle va continuer
+
+                    *********1*****-2
+                    ***************
+                    *********X******
+                    ************5***
+
+
+
+                    ********1*****-2
+                    ***************
+                    ****************
+                    *********X**5***
+
+                    puis on va decaler par a port à case qui sont en echec en ajoute en x+1 pour le bas
+
+
+                    ********1*X***-2
+                    ***************
+                    ****************
+                    ************5***
+
+                    puis
+
+                    ********1*****-2
+                    **********x****
+                    ****************
+                    ************5***
+
+
+                    etc etc.. jusqu'a trouver notre piece allier !
+
+
+                     */
+
 
 
                 }
@@ -270,7 +340,7 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                     //si on est rois est que on tombe sur une piece ennemie
 
-                    int ANx = Ax;
+
 
                     //noter lancienne position de x
 
@@ -278,6 +348,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
                     //récupére ou est la piece ennemie
 
                     if (!ECHEC || Piece_Allier_Echec) {
+
+
 
 
                         if(Piece_Allier_Echec){
@@ -293,20 +365,9 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                             //la ça veut dire que notre piece qui pouvait bloquer lechec peut etre en echec et c'es vrm pas bon
 
-                            usage += 1;
-                           //la va falloir ajouter 1 à usage car dans le sens colone du bas ça peut pas marcher c'est
-                            //pas posible car le truc est clouer et mettre les ancienne coordonée du rois
+                           DoubleEchecDetected(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, 1, 0,this::Colone_Echecs);
 
 
-                            if(color == 1) {
-
-                                Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, 1, 0);
-                            }else{
-                                Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, -1, 0);
-
-
-
-                            }
 
 
                         }
@@ -314,15 +375,26 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
                         /*
                         CAS ON VIEN DETRE MIS EN ECHEC DE CE COTER
+                        pour le premier fois attention ici bien noter les coordonnée
 
+
+                         */
+
+                        directions.add(Direction.DOWN);
+                        /*
+                        Le fait de mettre une direction va permettre de savoir si c'est nous qu'il
+                        avait mis en echec ou non ce qui va permettre de quand on appel à nouveau la fonction
+                        pour dire de mettre la piece ennemi en jou bah de oas confondre avec un double
+                        echec vu que c'est déjà en echec
 
                          */
 
 
 
 
-                        Piece_echecs_x = x;
-                        Piece_echecs_y = y;
+                        FirstCheck( Ax,  Ay, x,  y,  usage, color, tour,  piece, tour_echec,this::Colone_Echecs,"COLONE");
+
+
 
                         /*
                         ici on va récupérer la position de la piece qui fait echecs au rois elle va nous servire plus tard
@@ -334,90 +406,8 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
 
-                        for (int i = 0; i <= tour; i++) {
 
 
-                            tour_echec += 1;
-
-                            /*
-
-                            LE tour echec compte les coup pour après quand on va devoir
-                            verifier chaque position ou traverse l'echec pour chercher un piece qui peut
-                            s'interposer ou non
-
-
-                             */
-
-
-
-                            CoupEchecKing.add("" + ANx + "," + y + "");
-
-
-
-
-
-                            //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
-                            //grace à ça on pourras voir si on peut interposer un piece entre les deux
-
-
-
-
-
-                            Graphic.buttons[ANx][y].setStyle("-fx-background-color: green;");
-
-
-
-                            ANx += 1;
-                            //va permettre de compter le nombre de tour pour déjà vérifier si on peut interpose une piece avant
-                            //puis si on peut manger ou non enfaite ça va etre un compteur elle va faire la meme fonction que tour mais pour lecehc
-
-
-                        }
-
-
-                        if (piece == 1 || piece == -1) {
-
-                            if (color == 1) {
-                                EchecsB = true;
-
-                            } else {
-
-                                EchecsN = true;
-                            }
-                        }
-
-
-                        System.out.println("" + x + "," + y + "");
-
-
-
-                        ECHEC = true;
-
-
-
-                        usage += 1;
-
-
-                        /*
-
-                        ici j'ai bien compris on rappel la fonction pour voir si on peut se tirer de cette
-
-                        echec mais nous somme les premiers sur lechec donc cela veut dire que on peut pas trouver
-                        sur la meme vois une piece qui peut s'interposer donc dans ce cas
-
-                        usage +1
-                        pour que les autre colone
-
-                                                 */
-
-
-
-                        Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece, tour_echec);
-                        /*
-
-
-                        partie teste j'ai remplacer tour par tour_eche car y a une verif en bas qui peut faiure merder
-                         */
 
 
                         // la ici  on est en échec  donc on rapel le meme truc pour voir si on peut sinterposer
@@ -426,63 +416,17 @@ d'autoriser ou non le fait de faire une raser la ou on pourra interposer une pie
 
 
 
+
+
                     else{
 
 
-
-
-                                    /*
-
-                                    CAS ON CROISSE UNE PIECE ENNEMI ET ON EST DEJA EN ECHECS
-                                    CAR SI CEST LA PREMIER FOIS BAH IL VA LIGNORER
-
-                                    ET SI CES PAS LA PREMIER FOIS CA VEUT SOIS DIRE QUE CEST UN AUTRE QUI
-                                    A DECOUVERT LECHEC ET CE COTER A DECOUVERT UN AUTRE ECHEC DONC DOUBLE
-                                    ECHEC CEST FINI OU A FAIT DEJA TOUT LES CAS
-
-
-                                    faire un etats qui dit que on est entrain de chercher une piece qui peut bouffer
-                                    la piece qui met en echec le rois
-
-
-                                     */
-
-
-
-                          /*
-
-                            CAS NOUS SOMME EN ECHEC ET NOUS NE POUVON PAS INTERCEPTER LECHEC
-
-
-                            ET NE NOUS POUVON PAS DEPLACER LE ROIS DANS UN  ENDROIT SAFE !
-
-                                        -POUR LENDROIT SAFE FAIRE APRES AVOIR FINI LES ECHEC ET INTERCEPTION DECHEC
-                                        CAR ON VA UTILISER COLONE ECHEC ET DIAGONAL ECHEC ET CAVALIER ECHEC  POUR LES CASE DISPO
-
-
-
-
-                             */
-
-
-
-
-
-
-
-
-
-/*
-
-
-si on est en echec et que on a pas de piece allier sur le passage et que on tombe sur une piece ennemie
-
- */
-
-
                         /*
-                        parti illogique  on dit que si on est en echec  et que on retombe sur une piece
-                        ennemie faire d'inverser les couleur
+                        CAS nous somme en echec et nous avons aucun piece pour faire
+                        l'interception
+
+
+
 
 
 
@@ -490,53 +434,28 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
+                        if(directions.contains(Direction.DOWN)) {
 
 
                             /*
+                            cela serait un double appel en quelque sorte
 
-                            il y a un probléme c'est que il regarde que de son coter
+                            je suis en echec cotter du bas
 
-                            c'est a dire si il est en echec du coté gauche il va regarder au bas pour voi
-                            mais il trouve une piéce ennemi il va la target ce qui est bon
-                            quand c'est le premier et que c'est lui a l'echec mais si c'est pas le cas
-                            cela va poser des probléme soudain  crée un variable pour évaluer cela ?
+                            ******+1******
+                            **************
+                            ******-2******
+                            **************
+                            **************
+                            ******+5******
 
-
-
-                             */
-
-
-                            /*
-
-                            la logique n'est pas logique
-
-                            ce que on doit faire c'est regarder si lechec vien de nous si c'est le cas  genre de se coter et bien lignorer
-
-
-                             */
-
-
-                            /*
-                            si c'est n'est pas le cas et que on tombe sur une piece ennemie  et que c'est un tour ou une dame
-                            et bien mettre en double echec
-
-
-                            si c'est seulement une piece noir ramdom et bien lignore
-
-
-                            la partie du bas ne sert à rien et le echec 2 ne sert a rien on peut le faire directement  quand il est en eche la premier fois
-                            aussi regarder quand on tombe sur piece allier
+                            sur les autre coter on a rien à trouver donc on retourn sur le coter
+                            original donc ici down on  detected que c'est lui et fait ce qu'il faut
+                            donc la il se dit ok on va bouffer la piece ennemie
 
 
 
 
-                             */
-
-                            /*
-
-
-                            CAS NOUS TOMBON SUR UNE PIECE ENNEMI qui nous mennace et nous somme déjà en echec
-                           Dans ce cas DOUBLE ECHEC
 
                              */
 
@@ -544,7 +463,7 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
-                         if(piece == 1 || piece == -1) {
+                            if (piece == 1 || piece == -1 && !Piece_ennemie) {
 
                              /*
                                 cette verification permet de dire si la piece est le rois ou pas pour éviter
@@ -555,32 +474,36 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
                               */
 
 
-
-                             if (color == 1) {
-                                 //si de base il est blanc le mettre en noir et invesement
-                                 color = 0;
-                             } else {
+                                if (color == 1) {
+                                    //si de base il est blanc le mettre en noir et invesement
+                                    color = 0;
 
 
-                                 color = 1;
-                             }
+                                } else {
 
 
-
-                             piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
-
-
-                             //ici devoir mettre position de la piece qui fait chier
-
-                             Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
+                                    color = 1;
+                                }
 
 
-                             //sur notre trajet on tombe sur une piece ennemie donc ça sert plus a rien on passe au miammaim trouver quelque chose pour ce faire manger
+                                Piece_ennemie = true;
+                                // cela veut juste dire que on s'attaque désormer à la piece
 
-                         }
+
+                                piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
 
 
-                        if(Piece_ennemie) {
+                                //ici devoir mettre position de la piece qui fait chier
+
+                                Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
+
+
+                                //sur notre trajet on tombe sur une piece ennemie donc ça sert plus a rien on passe au miammaim trouver quelque chose pour ce faire manger
+
+                            }
+
+
+                            if (Piece_ennemie) {
 
 
                             /*
@@ -608,7 +531,7 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
                              */
 
 
-                            Graphic.buttons[x][y].setStyle("-fx-background-color: black");
+                                Graphic.buttons[x][y].setStyle("-fx-background-color: black");
 
                             /*
 
@@ -617,33 +540,63 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
                              */
 
-                            Graphic.buttons[Ax][y].setStyle("-fx-background-color: purple");
+                                Graphic.buttons[Ax][y].setStyle("-fx-background-color: purple");
                             /*
 
                             mettre la piece ennemie en violet pour dire que c'est cette piece qu'il faut bouffer
                              */
 
 
-                            CoupEchec.clear();
-                            //ici pour retirer les ancien position qui peut avoir et après ajouter la position de lennemie
+                                CoupEchec.clear();
+                                //ici pour retirer les ancien position qui peut avoir et après ajouter la position de lennemie
 
-                            CoupEchec.add("" + Ax + "," + y + "");
-
-
+                                CoupEchec.add("" + Ax + "," + y + "");
 
 
+                                //en gros la c'est la partie reset qui va permettre de remettre un peu tout ancien état de lechec decouverte pour regarde les autre colone quoi si y aeche ou non
+
+
+                            }
+
+
+                        }else{
+
+
+                            /*
+                            cela veut juste dire que on est en echec mais que l'echec ne vien pas de nous
+                            et que nous avon pas de piece qui peuve intersepter on se retrouve en double
+                            echec dans ce cas la
+
+
+
+                             */
+
+                            if(KingEscape(Ax,Ay)){
 
 
 
 
+                            }
 
 
 
 
+                            /*
+                            Nous somme en double echec car de base on est en echec et la piece qui vient de  nous donne ce nouveaux echec de ce
+                            coter la
+                            ne vien pas de nous et ne nous pouvons pas intercepter l'echec doncv
+
+
+                           cas FUITE
+
+                           faire fonction si le rois peut fuir
+                           sinon CHECK MATE
 
 
 
-                            //en gros la c'est la partie reset qui va permettre de remettre un peu tout ancien état de lechec decouverte pour regarde les autre colone quoi si y aeche ou non
+
+                             */
+
 
 
 
@@ -658,61 +611,11 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
-
-
-
-
                     }
 
                 }
 
 
-
-
-            } else {
-
-
-
-
-                x += 1;
-
-
-
-
-
-    if (tour_echec == 0 && ECHEC) {
-
-
-        NombreEchec += 1;
-
-        if (color == 1) {
-            //si de base il est blanc le mettre en noir et invesement
-            color = 0;
-        } else {
-
-
-            color = 1;
-        }
-
-        piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
-
-        Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
-
-
-    } else {
-
-
-        if (NombreEchec == 2) {
-            for (int i = 0; i < 1000; i++) {
-                System.out.println("AZERTY");
-            }
-
-
-        }
-
-        Colone_Echecs(Ax, Ay, x, y, usage, color, tour, piece, tour_echec);
-
-    }
 
 
             }
@@ -736,63 +639,70 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
 
-            if(tour_echec == 0 && ECHEC){
-
-                NombreEchec += 1;
-
-                if(color == 1){
-                    //si de base il est blanc le mettre en noir et invesement
-                    color = 0;
-                }else{
-
-
-                    color = 1;
-                }
-
-                piece = Graphic.grilleEchecs[Piece_echecs_x][Piece_echecs_y];
-
-                Colone_Echecs(Piece_echecs_x, Piece_echecs_y, Piece_echecs_x, Piece_echecs_y, usage, color, tour, piece, tour_echec);
-
-
-            }else {
-                /*
-
-                zib zob
-                 */
-
-        if(NombreEchec == 2){
-
-
-         NombreEchec  -= 1;
-            for(int i = 0; i < 1000; i++) {
-                System.out.println("AZERTY");
-            }
 
 
 
-            if(color == 1){
-                //si de base il est blanc le mettre en noir et invesement
-                color = 0;
-            }else{
+            if(ECHEC){
+
+                    /*
+                    nous somme en echec mais nous ne  sommes tomber sur aucune piéce ennemie
+                    ou allier
 
 
-                color = 1;
-            }
-            usage += 1;
-            piece = Graphic.grilleEchecs[SPiece_echecs_x][SPiece_echecs_y];
+                     */
 
-            Colone_Echecs(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, piece, tour_echec);
-
-
-
-    }
                 usage += 1;
 
+                Colone_Echecs(Ax,Ay,x,y,usage,color,tour,piece,tour_echec);
+
+
+
+                /*
+                ajoute 1 à usage et continuer de regarder si on tombe sur quelque chose
+                si c'est déjà à 4 remttre un couche de vérification pour peut etre tomber sur un truc
+
+
+
+                 */
+
+                if(!DOUBLE_VERIFICATION){
+
+                    usage = 0;
+
+                    DOUBLE_VERIFICATION = true;
+
+                    Colone_Echecs(Ax,Ay,x,y,usage,color,tour,piece,tour_echec);
+
+
+
+                }
+
+
+
+
+
+
+            }else if(Piece_Allier_Echec){
+
+                /*
+                la piec allier n'est pas menacer donc ça vaaaaaaaaaaaaaaaa
+                 */
+
+
+
+
+
+
+            }else if(Piece_ennemie){
+                /*
+
+
+                la piece ennemie na pas de truc qui la menace alors continuer
+                 */
+
+
+
             }
-
-
-
-
 
 
 
@@ -807,7 +717,7 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
             */
 
 
-            if (usage < 2) {
+            if (usage < 5) {
 
                 System.out.println("la on rapel encore");
 
@@ -834,6 +744,19 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
         }
 
 
+    }
+
+    private boolean KingEscape(int Ax, int Ay) {
+
+
+
+
+
+
+
+
+
+        return false;
     }
 
 
@@ -946,6 +869,258 @@ si on est en echec et que on a pas de piece allier sur le passage et que on tomb
 
 
     }
+
+    public void DoubleEchecDetected( int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece,int tour_echec,FonctionDeFonction fonction){
+
+
+
+
+        usage += 1;
+        //la va falloir ajouter 1 à usage car dans le sens colone du bas ça peut pas marcher c'est
+        //pas posible car le truc est clouer et mettre les ancienne coordonée du rois
+
+
+        if(color == 1) {
+
+            fonction.apply(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, 1, 0);
+        }else{
+            fonction.apply(SPiece_echecs_x, SPiece_echecs_y, SPiece_echecs_x, SPiece_echecs_y, usage, color, tour, -1, 0);
+
+
+
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    public void FirstCheck(int Ax, int Ay, int x, int y, int usage, int color, int tour, int piece,int tour_echec,FonctionDeFonction fonction,String type){
+
+
+
+        Piece_echecs_x = x;
+        Piece_echecs_y = y;
+
+        x = Ax;
+        y= Ay;
+
+
+
+        //le fait de faire ça sauvegarde l'été
+
+
+
+                        /*
+                        ici on va récupérer la position de la piece qui fait echecs au rois elle va nous servire plus tard
+                        pour pouvoirs faire une vérification si cette piece peut etre mangé ou non et donc pouvoirs contrer lechec ou NON !
+
+
+
+                         */
+
+
+
+        for (int i = 0; i <= tour; i++) {
+
+
+            tour_echec += 1;
+
+                            /*
+
+                            LE tour echec compte les coup pour après quand on va devoir
+                            verifier chaque position ou traverse l'echec pour chercher un piece qui peut
+                            s'interposer ou non
+
+
+                             */
+
+
+
+            CoupEchecKing.add("" + Ax + "," + Ay + "");
+
+
+
+
+
+            //ajouter dans un liste en fesant une boucle la ou passe l'échec du rois
+            //grace à ça on pourras voir si on peut interposer un piece entre les deux
+
+
+
+
+
+            Graphic.buttons[Ax][Ay].setStyle("-fx-background-color: green;");
+
+
+
+
+            //pour gérer les opération c'est a dire si c'est coter du bas o fait ax +1 si c'est du heaut ax -1
+            //on utilise les usage pour déterminer cela
+
+
+            switch (type) {
+
+                case "COLONE":
+
+
+                switch (usage) {
+                    case 1:
+                        Ax += 1;
+                        break;
+                    case 2:
+                        Ax -= 1;
+                        break;
+                    case 3:
+                        Ay += 1;
+                        break;
+
+                    case 4:
+
+                        Ay -= 1;
+                        break;
+
+
+                    default:
+
+                        break;
+
+                }
+                ///////////////////////////////
+
+                break;
+
+
+                case "DIAGONALE":
+
+
+                    switch (usage) {
+                        case 1:
+                            Ax += 1;
+                            Ay +=1;
+                            break;
+                        case 2:
+                            Ax -= 1;
+                            Ay -= 1;
+                            break;
+
+                        case 3:
+                            Ay += 1;
+                            Ax -= 1;
+                            break;
+
+                        case 4:
+
+                            Ay -= 1;
+                            Ax += 1;
+                            break;
+
+
+                        default:
+
+                            break;
+
+                    }
+
+                    break;
+
+
+
+
+
+
+
+
+
+
+                default:
+
+                    break;
+
+            }
+
+
+
+
+
+            //va permettre de compter le nombre de tour pour déjà vérifier si on peut interpose une piece avant
+            //puis si on peut manger ou non enfaite ça va etre un compteur elle va faire la meme fonction que tour mais pour lecehc
+
+
+        }
+
+
+        if (piece == 1 || piece == -1) {
+
+            if (color == 1) {
+                EchecsB = true;
+
+            } else {
+
+                EchecsN = true;
+            }
+        }
+
+
+        System.out.println("" + x + "," + y + "");
+
+
+
+        ECHEC = true;
+
+
+
+        usage += 1;
+
+
+                        /*
+
+                        ici j'ai bien compris on rappel la fonction pour voir si on peut se tirer de cette
+
+                        echec mais nous somme les premiers sur lechec donc cela veut dire que on peut pas trouver
+                        sur la meme vois une piece qui peut s'interposer donc dans ce cas
+
+                        usage +1
+                        pour que les autre colone
+
+                                                 */
+Ax = x;
+Ay = y;
+
+//c'est pour remettre en etat origine que j'ai fait ça pour pouvoirs modifier
+        //et mettre en coleur ce qui traverse lechec avec Ax et Ay qui sont les coordonée du rois
+
+        //j'aurait pu utiliser x ou y mais jsp si elles sont été modifier ce code est trop une usine à gaz
+
+
+        fonction.apply(Ax, Ay, Ax, Ay, usage, color, tour, piece, tour_echec);
+                        /*
+
+
+                        partie teste j'ai remplacer tour par tour_eche car y a une verif en bas qui peut faiure merder
+                         */
+
+
+        // la ici  on est en échec  donc on rapel le meme truc pour voir si on peut sinterposer
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
