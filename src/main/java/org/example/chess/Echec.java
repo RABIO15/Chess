@@ -177,7 +177,7 @@ public class Echec {
 
 
 
-    switch (usage) {
+    switch (usage)  {
 
 
 
@@ -348,6 +348,11 @@ public class Echec {
                     //récupére ou est la piece ennemie
 
                     if (!ECHEC || Piece_Allier_Echec) {
+
+                        /*
+                         !ECHEC premier echec
+
+                         */
 
 
 
@@ -747,11 +752,6 @@ public class Echec {
     }
 
     private boolean KingEscape(int Ax, int Ay) {
-
-
-
-
-
 
 
 

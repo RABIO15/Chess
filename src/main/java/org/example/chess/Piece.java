@@ -1739,6 +1739,8 @@ le usage permet de s'arreter de voir combien de diagonal on a fait ce qui permet
 
                     x -= 1;
 
+
+
                       //  Graphic.buttons[x][y].setStyle("-fx-background-color: green;");
                     System.out.println("_____________________");
                             System.out.println("                        ");
@@ -2076,26 +2078,6 @@ Ech
 
                 System.out.println("CASE1 ");
                 System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-                System.out.println("CASE1 ");
-
 
 
                 //permet de ajouter un cordonnée en forme de string  pour que ça soit plus pratique
