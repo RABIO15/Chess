@@ -112,9 +112,7 @@ public class Coup {
             default:
 
                 System.out.println("Un problème est survenue");
-                System.out.println("Un problème est survenue");
-                System.out.println("Un problème est survenue");
-                System.out.println("Un problème est survenue");
+
 
                 break;
 

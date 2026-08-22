@@ -598,6 +598,10 @@ if(!Verification_coup(piece,newpiece)){
 
                      */
 
+                    Echec echec = new Echec();
+
+                    echec.Colone_Echecs(sauvegarde_ligne,sauvegarde_colonne,sauvegarde_ligne,sauvegarde_colonne,-1,1,0,0,0);
+
                     autorisation_list_King(sauvegarde_ligne, sauvegarde_colonne, sauvegarde_ligne, sauvegarde_colonne, 0);
 
                 }

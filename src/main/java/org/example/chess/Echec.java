@@ -146,12 +146,27 @@ public class Echec {
 
 
 
-        if(usage == 0){
+
+        if(usage == -1){
 
 
             usage += 1;
 
 
+            x +=1;
+            //permet de sauvegarder l'état de ou est le rois de base
+            Graphic.buttons[x][y].setStyle("-fx-background-color: white;");
+
+
+        }
+
+
+        if(usage == 0){
+
+
+            usage += 1;
+
+            Graphic.buttons[x][y].setStyle("-fx-background-color: brown;");
             SPiece_echecs_x = Ax;
             SPiece_echecs_y = Ay;
             //permet de sauvegarder l'état de ou est le rois de base
@@ -168,11 +183,11 @@ public class Echec {
         try {
 
 
-            int PIECE_PRESENTE = Graphic.grilleEchecs[x][y];
+            int PIECE_PRESENTE;
             //servira pour plus tard
 
 
-            System.out.println("DEBUT DU TRY ");
+
 
 
 
@@ -192,6 +207,7 @@ public class Echec {
 
 
             tour += 1;
+
             //les tour tour fond permettre de savoir ou on a est pour pouvoir l'utiliser après pour connaitre les coordonée ou traversse lechecss
 
             PIECE_PRESENTE = Graphic.grilleEchecs[x][y];
@@ -204,11 +220,14 @@ public class Echec {
                 //suivante
 
                  newpiece = Graphic.grilleEchecs[x][y];
+                Graphic.buttons[x][y].setStyle("-fx-background-color: purple;");
                 /*
 
                 on crée une variable qui va recupérer les coordonée ou on a une piece pour pouvoir la comparé par la suite
 
                  */
+
+
 
                 if(ECHEC){
 
@@ -328,7 +347,7 @@ public class Echec {
                 if (piecess.Same_Color(piece, newpiece) ) {
 
 
-                    Same_color_Execute(Ax, Ay,  x,  y,  usage,  color,  tour,  piece, tour_echec, this::Colone_Echecs);
+                    //Same_color_Execute(Ax, Ay,  x,  y,  usage,  color,  tour,  piece, tour_echec, this::Colone_Echecs);
 
 
 
@@ -364,6 +383,43 @@ public class Echec {
                             CAS DOUBLE ECHEC
 
                             LA PIECE QUE ON A TROUVER ET ELLE  MEME CLOUER
+                            dans le cas ou lechec vien d'un autre direction que on peut l'intercepter
+                            mais que on a une piece qui nous mais en echec par le coter bas
+
+                           exemple illutration
+
+
+
+                            1 rois blanc
+
+                            -2 reinne noir
+
+                            3 fou blanc
+
+                            -5tour noir
+
+                            * case vide
+
+
+
+
+                            *****1*****-2
+                            *************
+                            *****3*******
+                            *************
+                            **************
+                            ****-5********
+
+                            le fous peut instercepter l'echec de la dame mais mettrais le rois en
+                            danger
+
+
+
+
+
+
+
+
 
                              */
 
@@ -569,7 +625,7 @@ public class Echec {
 
                             /*
                             cela veut juste dire que on est en echec mais que l'echec ne vien pas de nous
-                            et que nous avon pas de piece qui peuve intersepter on se retrouve en double
+                           (notre coter) et que nous avon pas de piece qui peuve intersepter on se retrouve en double
                             echec dans ce cas la
 
 
@@ -623,6 +679,19 @@ public class Echec {
 
 
 
+            }else{
+
+                Graphic.buttons[x][y].setStyle("-fx-background-color: blue");
+
+                x+= 1;
+
+
+
+                Colone_Echecs(Ax,Ay,x,y,usage,color,tour,piece,tour_echec);
+
+                //cas on rencontre aucune piece lets go
+
+
             }
 
 
@@ -658,7 +727,7 @@ public class Echec {
 
                 usage += 1;
 
-                Colone_Echecs(Ax,Ay,x,y,usage,color,tour,piece,tour_echec);
+                //  Colone_Echecs(Ax,Ay,x,y,usage,color,tour,piece,tour_echec);
 
 
 
@@ -668,7 +737,8 @@ public class Echec {
 
 
 
-                 */
+                 //////////////////////////////////////////////
+
 
                 if(!DOUBLE_VERIFICATION){
 
@@ -681,6 +751,8 @@ public class Echec {
 
 
                 }
+
+                 */
 
 
 
@@ -727,7 +799,7 @@ public class Echec {
                 System.out.println("la on rapel encore");
 
                 usage += 1;
-                Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece,tour_echec);
+               // Colone_Echecs(Ax, Ay, Ax, Ay, usage, color, tour, piece,tour_echec);
 
 
 
@@ -928,7 +1000,42 @@ public class Echec {
 
 
 
-        for (int i = 0; i <= tour; i++) {
+        for (int i = 1; i <= tour; i++) {
+
+
+            for (int j = 0; j <= 5; j++) {
+                System.out.println("TOURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+                System.out.println("__________________________________");
+
+
+                System.out.println("                                     ");
+
+                System.out.println("                                     ");
+
+                System.out.println("                                     ");
+
+
+                System.out.println("tour TOTAL =" + tour);
+                System.out.println("tour  ACTUEL =" + i);
+
+
+
+                System.out.println("                                     ");
+
+                System.out.println("                                     ");
+
+
+                System.out.println("__________________________________");
+
+
+
+                System.out.println("TOURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+
+
+
+            }
 
 
             tour_echec += 1;
@@ -957,7 +1064,8 @@ public class Echec {
 
 
 
-            Graphic.buttons[Ax][Ay].setStyle("-fx-background-color: green;");
+
+
 
 
 
@@ -1046,6 +1154,8 @@ public class Echec {
 
             }
 
+
+            Graphic.buttons[Ax][Ay].setStyle("-fx-background-color: green;");
 
 
 
